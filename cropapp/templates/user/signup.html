@@ -1,0 +1,90 @@
+{% extends 'loginsignupbase.html' %}
+{% load static %}
+{% block content %}
+
+                
+                <div class="col-sm-10 login-box">
+                    <div class="row">
+                       <div class="col-lg-4 col-md-5 box-de" style="background-image: url({% static '/images/bg_2.jpg' %});">
+                           <div class="small-logo">
+                                <i class="fab fa-asymmetrik"></i> Farmer's Sign up
+                            </div>
+                            <div class="ditk-inf sup-oi">
+                                <h2 class="w-100">Already Have an Account </h2>
+                                <p>Simply login to your account by clicking the login Button</p>
+                                <a href="/farmers/login/">
+                                    <button type="button" class="btn btn-outline-light">Login</button>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-lg-8 col-md-7 log-det">
+                            
+                            <h2>Create Account</h2>
+                            <div class="text-box-cont">
+                                <form action="/farmers/signup/" method="post" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    {% if msg %}
+                                    <span style="color: red;">{{ msg }}</span>
+                                    {% endif %}
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">
+                                        <i class="far fa-user"></i></span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="First Name" name="first_name" aria-describedby="basic-addon1" required>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">
+                                        <i class="far fa-user"></i></span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="Last Name" name="last_name" aria-describedby="basic-addon1" required>
+                                </div>
+
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">
+                                        <i class="far fa-user"></i></span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="Username" name="user_name" aria-describedby="basic-addon1" required>
+                                </div>
+
+                                 <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1"><i class="fas fa-lock"></i></span>
+                                    </div>
+                                    <input type="password" class="form-control" placeholder="Password" name="password" aria-describedby="basic-addon1" required>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">
+                                            <i class="far fa-envelope"></i>
+                                        </span>
+                                    </div>
+                                    <input type="email" class="form-control" placeholder="Email Address" name="email" aria-describedby="basic-addon1" required>
+                                </div>
+                              
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">
+                                        <i class="fa fa-phone"></i></span>
+                                    </div>
+                                    <input type="number" class="form-control" placeholder="phone" name="phone" aria-describedby="basic-addon1" required min="1000000000" max="9999999999" >
+                                </div>
+                               
+                        
+                                <div class="input-group center mb-3">
+                                    <input type="reset" style="border-radius: 25px" class="btn btn-success btn-round" placeholder="Reset" >
+                                    <button class="btn btn-success btn-round" type="submit">Signup</button>
+
+                                </div>   
+                                </form>  
+                            </div>
+                            
+
+
+                        </div>
+                       
+                    </div>
+                </div>
+              {% endblock %}

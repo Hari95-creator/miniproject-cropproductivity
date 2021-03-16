@@ -1,0 +1,60 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Farmer's E Market</title>
+
+    <link rel="shortcut icon" href="{% static '/loginsignup/images/fav.jpg' %}">
+    <link rel="stylesheet" href="{% static '/loginsignup/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static '/loginsignup/css/fontawsom-all.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static '/loginsignup/css/style.css' %}" />
+</head>
+
+<body>
+    <div class="container-fluid ">
+        <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+        <div class="container">
+          <a class="navbar-brand" href="/publicindex/">Farmer's E Market</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="oi oi-menu"></span> Menu
+          </button>
+
+          <div class="collapse navbar-collapse" id="ftco-nav">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item active"><a href="/publicindex/" class="nav-link">Home</a></li>
+              <li class="nav-item"><a href="/publicshop/" class="nav-link">Shop</a></li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="/publicshop/" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">About</a>
+                <div class="dropdown-menu" aria-labelledby="dropdown04">
+                  <a class="dropdown-item" href="/publicabout/">About US</a>
+                  <a class="dropdown-item" href="/farmersdetails/">Our Farmers</a>
+                </div>
+              </li>
+              <li class="nav-item"><a href="/publiccontact/" class="nav-link">Contact us</a></li>
+
+            </ul>
+          </div>
+        </div>
+      </nav>
+        <div class="container ">
+            <div class="row ">
+                
+            {% block content %}
+             
+            {% endblock %}
+
+            </div>
+        </div>
+    </div>
+</body>
+
+<script src="{% static '/loginsignup/js/jquery-3.2.1.min.js' %}"></script>
+<script src="{% static '/loginsignup/js/popper.min.js' %}"></script>
+<script src="{% static '/loginsignup/js/bootstrap.min.js' %}"></script>
+<script src="{% static '/loginsignup/js/script.js' %}"></script>
+
+
+</html>
