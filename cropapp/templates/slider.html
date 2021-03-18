@@ -1,0 +1,74 @@
+<section id="home-section" class="hero">
+    <div class="home-slider owl-carousel">
+    <div class="slider-item" style="background-image: url({% static 'images/bg_1.jpg' %});">
+        <div class="overlay"></div>
+      <div class="container">
+        <div class="row slider-text justify-content-center align-items-center" data-scrollax-parent="true">
+
+          <div class="col-md-12 ftco-animate text-center">
+            <h1 class="mb-2">We serve Fresh Vegestables &amp; Fruits</h1>
+            <h2 class="subheading mb-4">We deliver organic vegetables &amp; fruits</h2>
+            <p><a href="shop" class="btn btn-primary">Shop now</a></p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="slider-item" style="background-image: url({% static 'images/bg_2.jpg' %});">
+        <div class="overlay"></div>
+      <div class="container">
+        <div class="row slider-text justify-content-center align-items-center" data-scrollax-parent="true">
+
+          <div class="col-sm-12 ftco-animate text-center">
+            <h1 class="mb-2">100% Fresh &amp; Organic Foods</h1>
+            <h2 class="subheading mb-4">We deliver organic vegetables &amp; fruits</h2>
+            <p><a href="shop" class="btn btn-primary">Shop now</a></p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+#dont copy above code testing use  
+
+
+{% if wishlist %}
+                        {% for item in wishlist %}
+                        {% for subt in subtotal %}
+                        {% if forloop.counter == forloop.parentloop.counter %}
+                      <tr id="myElement" class="text-center">
+                        <td class="product-remove"><a href="#" id="removewish" data-id="{{ item.productid.id }}" class="remove-from-wish"><span class="ion-ios-close"></span></a></td>
+                        
+                        <td class="image-prod"><a href="/product?id={{ item.productid.id }}"><div class="img" style="background-image:url({{ item.productid.img.url}});"></div></a></td>
+                        
+                        <td class="product-name">
+                            <h3>{{ item.productid.pname }}</h3>
+                            <p>{{ item.productid.description }}</p>
+                        </td>
+                        
+                        <td class="price">₹{% if item.productid.offer %}{{ item.productid.offerprice }}{% else %}{{ item.productid.price }}{% endif %}</td>
+                        
+                        <td class="quantity">
+                            <div class="input-group mb-3">
+                             <input type="text" name="quantity" class="quantity form-control input-number" value="{{ item.quantity }}" min="1" max="100" readonly>
+                          </div>
+                      </td>
+                        
+                        <td class="total">₹{{ subt }}</td>
+                      </tr><!-- END TR-->
+                      {% endif %}
+                      {% endfor %} 
+                      {% endfor %} 
+                      {% else %} 
+                      <tr id="myElement" class="text-center">
+                        <td colspan="6">
+                            <h4>Your Wishlist is Empty..!</h4>
+                            <p class="lead">
+                                   <a class="btn btn-primary btn-sm" href="shop" role="button">Continue to Shopping</a></p>
+                        </td>
+                      </tr>
+                      {% endif %}  
+                    

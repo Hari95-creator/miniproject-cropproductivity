@@ -25,6 +25,10 @@ urlpatterns = [
     path('adminbase/',views.adminbase),
     path('userbase/',views.userbase),
     path('signuppage/',views.signup),
+    path('userdetails/',views.user_details),
+    path('testing/',views.testing),
+    
+
 
 
 
