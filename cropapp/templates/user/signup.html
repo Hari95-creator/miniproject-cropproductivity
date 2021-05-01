@@ -12,7 +12,7 @@
                             <div class="ditk-inf sup-oi">
                                 <h2 class="w-100">Already Have an Account </h2>
                                 <p>Simply login to your account by clicking the login Button</p>
-                                <a href="/farmers/login/">
+                                <a href="/userlogin/">
                                     <button type="button" class="btn btn-outline-light">Login</button>
                                 </a>
                             </div>
@@ -21,10 +21,10 @@
                             
                             <h2>Create Account</h2>
                             <div class="text-box-cont">
-                                <form action="/farmers/signup/" method="post" enctype="multipart/form-data">
+                                <form method="post" enctype="multipart/form-data">
                                     {% csrf_token %}
                                     {% if msg %}
-                                    <span style="color: red;">{{ msg }}</span>
+                                    <span style="color: red; text-align: justify;">{{ msg }}</span>
                                     {% endif %}
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
@@ -53,7 +53,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1"><i class="fas fa-lock"></i></span>
                                     </div>
-                                    <input type="password" class="form-control" placeholder="Password" name="password" aria-describedby="basic-addon1" required>
+                                    <input type="password" class="form-control" placeholder="Password" name="pass_word" aria-describedby="basic-addon1" required>
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
@@ -62,14 +62,13 @@
                                         </span>
                                     </div>
                                     <input type="email" class="form-control" placeholder="Email Address" name="email" aria-describedby="basic-addon1" required>
-                                </div>
-                              
+                                </div>                  
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">
                                         <i class="fa fa-phone"></i></span>
                                     </div>
-                                    <input type="number" class="form-control" placeholder="phone" name="phone" aria-describedby="basic-addon1" required min="1000000000" max="9999999999" >
+                                    <input type="text" class="form-control" placeholder="phone" name="phone" aria-describedby="basic-addon1" required minlength="10" maxlength="13" >
                                 </div>
                                
                         
