@@ -1,0 +1,72 @@
+{% extends 'user/userbase.html' %}
+{% load static %}
+{% block Content1 %}
+
+<div class="hero-wrap hero-bread" style="background-image: url('{% static '/images/bg_1.jpg' %}');">
+  <div class="container">
+    <div class="row no-gutters slider-text align-items-center justify-content-center">
+      <div class="col-md-9 ftco-animate text-center">
+          <p class="breadcrumbs"><span class="mr-2">ENTER YOUR</span></p>
+        <h1 class="mb-0 bread">SOIL DETAILS</h1>
+      </div>
+    </div>
+  </div>
+</div>
+<section class="ftco-section ftco-cart">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 ftco-animate">
+        <div class="cart-list">
+          <table class="table">
+            <thead class="thead-primary">
+              <tr class="text-center">
+
+                <th>Enter soil test result to predict suitable crop</th>
+            
+            </tr>
+            </thead>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 ftco-animate">
+        <div class="cart-list">
+          <form action="#" method="post">
+          <table class="table">
+            <tbody>
+                                <tr class="text-center">
+                                <th> Temprature </th>
+                                <th> <input type="text" step="0.1" min="0" max="1" required></th>
+                            </tr>
+                            <tr class="text-center">
+                                <th> Humidity </th>
+                                <th> <input type="text" step="0.1" min="0" max="1" required></th>
+                            </tr>
+                            <tr class="text-center">
+                                <th> PH</th>
+                                <th> <input type="text" step="0.1" min="0" max="1" required></th>
+                            </tr>
+                            <tr class="text-center">
+                                <th> Rain Fall </th>
+                                <th> <input type="text" step="0.1" min="0" max="1" required></th>
+                            </tr>
+                            <tr id="myElement">
+                            <td colspan="6">
+                            <p class="lead">
+                            <button class="btn btn-success btn-round" type="submit"> Predict crop </button></p>
+                            </td>
+                           </tr>
+            </tbody>
+          </table>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
+

@@ -12,7 +12,7 @@
                             <div class="ditk-inf sup-oi">
                                 <h2 class="w-100">Already Have an Account </h2>
                                 <p>Simply login to your account by clicking the login Button</p>
-                                <a href="/farmers/login/">
+                                <a href="/userlogin/">
                                     <button type="button" class="btn btn-outline-light">Login</button>
                                 </a>
                             </div>
@@ -24,7 +24,7 @@
                                 <form method="post" enctype="multipart/form-data">
                                     {% csrf_token %}
                                     {% if msg %}
-                                    <span style="color: red;">{{ msg }}</span>
+                                    <span style="color: red; text-align: justify;">{{ msg }}</span>
                                     {% endif %}
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
@@ -62,8 +62,7 @@
                                         </span>
                                     </div>
                                     <input type="email" class="form-control" placeholder="Email Address" name="email" aria-describedby="basic-addon1" required>
-                                </div>
-                              
+                                </div>                  
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">

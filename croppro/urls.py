@@ -15,6 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from croppro import settings
+from django.conf.urls.static import static
 from cropapp import views
 
 
@@ -27,9 +29,15 @@ urlpatterns = [
     path('signuppage/',views.signup),
     path('userdetails/',views.user_details),
     path('testing/',views.testing),
-    
+    path('userlogin/',views.login),
+    path('soiltest/',views.soiltest),
+    path('soilprediction/',views.soilPredictionDb),
 
 
 
 
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)

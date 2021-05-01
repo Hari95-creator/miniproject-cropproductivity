@@ -41,31 +41,24 @@
 
 	      <div class="collapse navbar-collapse" id="ftco-nav">
 	        <ul class="navbar-nav ml-auto">
-	          <li class="nav-item active"><a href="/userhome" class="nav-link">Home</a></li>
+	          <li class="nav-item active"><a href="/adminhome" class="nav-link">Home</a></li>
 
 	          <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="analysis" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Analysis</a>
+              <a class="nav-link dropdown-toggle" href="Orders" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Orders</a>
               <div class="dropdown-menu" aria-labelledby="dropdown04">
-              	<a class="dropdown-item" href="/soil_data_analysis">Soil Analysis</a>
-                <a class="dropdown-item" href="/weather_data_analysis">Weather Data Analysis</a>
-                <a class="dropdown-item" href="/prediction_result">Analysis History</a>
+              	<a class="dropdown-item" href="/ViewOrders">View Orders</a>
 
+              	<a class="dropdown-item" href="/ViewFinished">View Finished Orders</a>
               </div>
 
             </li>
 
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="shop" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Shop</a>
-              <div class="dropdown-menu" aria-labelledby="dropdown04">
-              	<a class="dropdown-item" href="/userpurchase">Purchase</a>
-                <a class="dropdown-item" href="/userorders">Orders</a>
-              </div>
+	          <li class="nav-item"><a href="/managecrops" class="nav-link">Crops</a></li>
+            <li class="nav-item"><a href="/view_user" class="nav-link">View Users</a></li>
+            <li class="nav-item"><a href="/msg" class="nav-link">Messages</a></li>
+            <li class="nav-item"><a href="/updateadminpass" class="nav-link">Update Password</a></li>
+            <li class="nav-item"><a href="/adminlogout" class="nav-link">Log Out</a></li>
 
-            </li>
-
-	          <li class="nav-item"><a href="/userprofile" class="nav-link">Profile</a></li>
-            <li class="nav-item"><a href="/useraccount" class="nav-link">Manage Account</a></li>
-            <li class="nav-item"><a href="/userlogout" class="nav-link">Log Out</a></li>
 
 
 	        </ul>
@@ -73,40 +66,9 @@
 	    </div>
 	  </nav>
     <!-- END nav -->
+{% block slider %}
 
-<section id="home-section" class="hero">
-		  <div class="home-slider owl-carousel">
-	      <div class="slider-item" style="background-image: url({% static 'images/bg_1.jpg' %});">
-	      	<div class="overlay"></div>
-	        <div class="container">
-	          <div class="row slider-text justify-content-center align-items-center" data-scrollax-parent="true">
-
-	            <div class="col-md-12 ftco-animate text-center">
-	              <h1 class="mb-2">We serve Fresh Vegestables &amp; Fruits</h1>
-	              <h2 class="subheading mb-4">We deliver organic vegetables &amp; fruits</h2>
-	              <p><a href="shop" class="btn btn-primary">Shop now</a></p>
-	            </div>
-
-	          </div>
-	        </div>
-	      </div>
-
-	      <div class="slider-item" style="background-image: url({% static 'images/bg_2.jpg' %});">
-	      	<div class="overlay"></div>
-	        <div class="container">
-	          <div class="row slider-text justify-content-center align-items-center" data-scrollax-parent="true">
-
-	            <div class="col-sm-12 ftco-animate text-center">
-	              <h1 class="mb-2">100% Fresh &amp; Organic Foods</h1>
-	              <h2 class="subheading mb-4">We deliver organic vegetables &amp; fruits</h2>
-	              <p><a href="shop" class="btn btn-primary">Shop now</a></p>
-	            </div>
-
-	          </div>
-	        </div>
-	      </div>
-	    </div>
-    </section>
+{% endblock %}
 
   <section class="ftco-section ftco-no-pt ftco-no-pb py-5 bg-light">
       {% block Content1 %} {% endblock %}
@@ -114,7 +76,7 @@
     </section>
 
 		<section class="ftco-section ftco-category ftco-no-pt">
-            {% block Content2 %} {% endblock %}
+      {% block Content2 %} {% endblock %}
 
 		</section>
 

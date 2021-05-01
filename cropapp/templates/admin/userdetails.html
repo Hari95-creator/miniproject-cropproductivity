@@ -16,7 +16,7 @@
         <div class="row">
         <div class="col-md-12 ftco-animate">
             <div class="cart-list">
-                <table class="table">
+              <table class="table">
                     <thead class="thead-primary">
                       <tr class="text-center">
                         <th> &nbsp;</th>
@@ -32,6 +32,7 @@
                     </thead>
                     <tbody>
                         {% for farmer in farmers %} 
+                       
                         <tr>
                             <td>&nbsp;</td>
                             <td> {{farmer.id}}</td>
@@ -41,6 +42,7 @@
                             <td> {{farmer.phone}}</td>
                             <td>&nbsp;</td>
                             <td> {{farmer.email}}</td>
+                            <!-- <td>&nbsp;</td> -->
                         </tr>
                              
                         {% endfor %}  
