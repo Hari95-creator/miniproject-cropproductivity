@@ -41,7 +41,7 @@
 
 	      <div class="collapse navbar-collapse" id="ftco-nav">
 	        <ul class="navbar-nav ml-auto">
-	          <li class="nav-item active"><a href="/adminhome" class="nav-link">Home</a></li>
+	          <li class="nav-item active"><a href="/adminhome" class="nav-link">Admin Home</a></li>
 
 	          <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="Orders" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Orders</a>
@@ -54,13 +54,18 @@
             </li>
 
 	          <li class="nav-item"><a href="/managecrops" class="nav-link">Crops</a></li>
-            <li class="nav-item"><a href="/view_user" class="nav-link">View Users</a></li>
+            <li class="nav-item"><a href="/userdetails/" class="nav-link">View Users</a></li>
             <li class="nav-item"><a href="/msg" class="nav-link">Messages</a></li>
-            <li class="nav-item"><a href="/updateadminpass" class="nav-link">Update Password</a></li>
-            <li class="nav-item"><a href="/adminlogout" class="nav-link">Log Out</a></li>
-
-
-
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="shop" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Hey ,{{ admin.uname}}!</a>
+              <div class="dropdown-menu" aria-labelledby="dropdown04">
+                <a class="dropdown-item" href="orderhistory">Order History</a>
+                <a class="dropdown-item" href="changeaddress">Change Address</a>
+                <a class="dropdown-item" href="/updateadminpass">Change Password</a>
+                <a class="dropdown-item" href="/adminlogout">LogOut</a>
+              </div>
+            </li>
+            
 	        </ul>
 	      </div>
 	    </div>

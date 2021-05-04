@@ -34,12 +34,17 @@
     <div class="row">
       <div class="col-md-12 ftco-animate">
         <div class="cart-list">
-          {% if result %}
-            {{result}}
+          {% if result  %}
+          <div class="logerror">
+          <span style="color: red; text-align: center;">Your Predicted Crop is : {{ result}}</span><br><br>
+          </div>
           {% endif %}
 
           <form action="/soilprediction/" method="post">
             {% csrf_token %}
+
+            <input type="number" name="uid" value="{{user.id}}" hidden>
+            
           <table class="table">
             <tbody>
                             <tr class="text-center">

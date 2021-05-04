@@ -1,16 +1,50 @@
+from os import uname
+from re import U
 import pandas as pd
 from sklearn.tree import DecisionTreeClassifier
 from cropapp.models import admin
-from cropapp.models import userregister
+from cropapp.models import userregister,soilPrediction,weatherPrediction
 from django.http.response import HttpResponse, JsonResponse
 from django.shortcuts import render
 
-
 # Create your views here.
+
 def  index(request):
     return render(request,'index.html')
+
+def userdata(request):
+    try:
+        if request.session.has_key('sessionid'):
+            
+            udata=userregister.objects.get(uname=request.session['sessionid'])
+            return udata
+
+        else:
+
+            return index(request)
+
+    except:
+    
+        return index(request)
+
+def admindata(request):
+    try:
+        if request.session.has_key('sessionid'):
+            
+            udata=admin.objects.get(uname=request.session['sessionid'])
+            return udata
+
+        else:
+
+            return index(request)
+
+    except:
+    
+        return index(request)
+
 def  adminbase(request):
     return render(request,'admin/adminbasee.html')
+
 def  userbase(request):
     return render(request,'user/userbase.html')
 
@@ -41,10 +75,20 @@ def  signup(request):
     return render(request,'user/signup.html')
 
 def user_details(request):
+    admin=admindata(request)
     adminobj=userregister.objects.all()
-    return render(request, 'admin/userdetails.html', {'farmers': adminobj})
+    return render(request, 'admin/userdetails.html', {'farmers': adminobj,'admin':admin})
+
+def userhome(request):
+    user=userdata(request)
+    return render(request,'user/userhome.html',{'user':user})
+
+def adminhome(request):
+    admin=admindata(request)
+    return render(request,'admin/adminhome.html',{'admin':admin})
 
 def login(request):
+    
     if request.method== 'POST':
 
         utype = request.POST.get('utype')
@@ -63,7 +107,7 @@ def login(request):
                         request.session['sessionid']= ad.uname
                         request.session['password'] = ad.pwd
                        
-                        return HttpResponse('Admin Login success')
+                        return adminhome(request)
                     
                     else:
                         
@@ -85,7 +129,7 @@ def login(request):
                         request.session['sessionid']=user1.uname
                         request.session['upassword']=user1.pwd
                         
-                        return HttpResponse('User login success')
+                        return userhome(request)
                     
                     else:
 
@@ -96,10 +140,15 @@ def login(request):
                 return render(request,'login.html',{'status':'Oops User not in our database ....'})
 
     return render(request,'login.html')
+
+
     
 
 def soiltest(request):
-    return render(request,'user/soiiltest.html',)
+    # user=userregister.objects.get(uname=request.session('sessionid'))
+    user=userdata(request)
+    # return render(request,'user/soiiltest.html')
+    return render(request,'user/soiiltest.html',{'user':user})
 
 def soilPredictionDb(request):
     data=pd.read_csv("media/data/predictData.csv")
@@ -128,14 +177,63 @@ def soilPredictionDb(request):
     print("NNN=",nn)
     result=croplist[nn]
     print("result=",result)
-    user=userregister.objects.get(id=request.POST.get('uid'))
+    # user=userregister.objects.get(id=1)
+    user = userregister.objects.get(id=request.POST.get('uid'))
     db=soilPrediction(uid=user,cal=x0,mag=x1,po=x2,sul=x3,nit=x4,lim=x5,carb=x6,phos=x7,moist=x8,result=result)
     db.save()
 
     user=userdata(request)
     print(result)
+    # return render(request,'user/soiiltest.html',{'result':result})
     return render(request,'user/soiiltest.html',{'user':user,'result':result})
-    
+
+
+def weathertest(request):
+    user=userdata(request)
+    print (user.id)
+    # return render(request,'user/weathertest.html')
+    return render(request,'user/weathertest.html',{'user':user})
+
+def weatherPredictionDb(request):
+
+    crops = ['wheat', 'mungbean', 'Tea', 'millet', 'maize', 'lentil', 'jute', 'cofee', 'cotton', 'ground nut', 'peas',
+             'rubber', 'sugarcane', 'tobacco', 'kidney beans', 'moth beans', 'coconut', 'blackgram', 'adzuki beans',
+             'pigeon peas', 'chick peas', 'banana', 'grapes', 'apple', 'mango', 'muskmelon', 'orange', 'papaya',
+             'watermelon', 'pomegranate']
+
+    data = pd.read_csv('media/data/weather.csv')
+    print(data.head(1))
+    # Creating dummy variable for target i.e label
+    print('The data present in one row of the dataset is')
+    print(data.head(1))
+    y = data[['label']]
+    x = data[['temperature', 'humidity', 'ph', 'rainfall']]
+    # Dividing the data into training and test set
+
+    # Importing Decision Tree classifier
+    from sklearn.tree import DecisionTreeClassifier
+    clf = DecisionTreeClassifier()
+    from sklearn.model_selection import train_test_split
+    x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.3, random_state=2)
+    # Fitting the classifier into training set
+    clf.fit(x_train, y_train)
+    x1 = float(request.POST.get('temp'))
+    x2 = float(request.POST.get('hum'))
+    x3 = float(request.POST.get('ph'))
+    x4 = float(request.POST.get('rain'))
+    predicted = clf.predict([[x1, x2, x3, x4]])
+    print(predicted)
+    nn = int(predicted)
+    result = crops[nn]
+    # user = userregister.objects.get(id=1)
+    user = userregister.objects.get(id=request.POST.get('uid'))
+    db = weatherPrediction(uid=user, temp=x1, hum=x2, ph=x3, rain=x4, result=result)
+    db.save()
+    user = userdata(request)
+    return render(request,'user/weathertest.html',{'user':user,'result':result})
+    # return render(request, 'user/weathertest.html', {'result': result})
+
+
 
 
 

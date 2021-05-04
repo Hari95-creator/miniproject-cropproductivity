@@ -32,6 +32,10 @@ urlpatterns = [
     path('userlogin/',views.login),
     path('soiltest/',views.soiltest),
     path('soilprediction/',views.soilPredictionDb),
+    path('weathertest/',views.weathertest),
+    path('weatherprediction/',views.weatherPredictionDb),
+    path('userhome/',views.userhome),
+    path('adminhome/',views.adminhome),
 
 
 

@@ -7,7 +7,7 @@
     <div class="row no-gutters slider-text align-items-center justify-content-center">
       <div class="col-md-9 ftco-animate text-center">
           <p class="breadcrumbs"><span class="mr-2">ENTER YOUR</span></p>
-        <h1 class="mb-0 bread">SOIL DETAILS</h1>
+        <h1 class="mb-0 bread">WEATHER DETAILS</h1>
       </div>
     </div>
   </div>
@@ -21,7 +21,7 @@
             <thead class="thead-primary">
               <tr class="text-center">
 
-                <th>Enter soil test result to predict suitable crop</th>
+                <th>Enter weather test result to predict suitable crop</th>
             
             </tr>
             </thead>
@@ -34,30 +34,41 @@
     <div class="row">
       <div class="col-md-12 ftco-animate">
         <div class="cart-list">
-          <form action="#" method="post">
+          {% if result  %}
+          <div class="logerror">
+          <span style="color: red; text-align: center;">Your Predicted Crop is : {{ result}}</span><br><br>
+          </div>
+          {% endif %}
+          <form action="/weatherprediction/" method="post">
+            {% csrf_token %}
+          
+          <input type="number" name="uid" value="{{user.id}}" hidden>
+
           <table class="table">
             <tbody>
-                                <tr class="text-center">
+                            <tr class="text-center">
                                 <th> Temprature </th>
-                                <th> <input type="text" step="0.1" min="0" max="1" required></th>
+                                <th> <input name="temp" type="number" step="any" max="100" required></th>
                             </tr>
                             <tr class="text-center">
                                 <th> Humidity </th>
-                                <th> <input type="text" step="0.1" min="0" max="1" required></th>
+                                <th> <input name="hum" type="number" step="any" min="0" max="100" required></th>
                             </tr>
                             <tr class="text-center">
                                 <th> PH</th>
-                                <th> <input type="text" step="0.1" min="0" max="1" required></th>
+                                <th> <input name="ph" type="number" step="any" min="0" max="14" required></th>
                             </tr>
                             <tr class="text-center">
                                 <th> Rain Fall </th>
-                                <th> <input type="text" step="0.1" min="0" max="1" required></th>
+                                <th> <input name="rain" type="number" step="any" min="0" max="300" required></th>
                             </tr>
+                            
+                            
                             <tr id="myElement">
-                            <td colspan="6">
-                            <p class="lead">
-                            <button class="btn btn-success btn-round" type="submit"> Predict crop </button></p>
-                            </td>
+                              <td colspan="6">
+                                <p class="lead">
+                                <button class="btn btn-success btn-round" type="submit"> Predict crop </button></p>
+                              </td>
                            </tr>
             </tbody>
           </table>
