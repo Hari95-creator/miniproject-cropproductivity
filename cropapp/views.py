@@ -1,16 +1,42 @@
-from os import uname
-from re import U
 import pandas as pd
 from sklearn.tree import DecisionTreeClassifier
 from cropapp.models import admin
-from cropapp.models import userregister,soilPrediction,weatherPrediction
+from cropapp.models import userregister,soilPrediction,weatherPrediction,crops
 from django.http.response import HttpResponse, JsonResponse
 from django.shortcuts import render
+from django.core.files.storage import FileSystemStorage
 
 # Create your views here.
 
 def  index(request):
     return render(request,'index.html')
+
+def about(request):
+    return render(request,'about.html')
+
+def aboutuser(request):
+    user=userdata(request)
+    return render(request,'user/about.html',{'user':user})
+
+def aboutadmin(request):
+    admin=admindata(request)
+    return render(request,'admin/about.html',{'admin':admin})
+
+def contactuser(request):
+    user=userdata(request)
+    return render(request,'user/contact.html',{'user':user})
+
+def contactadmin(request):
+    admin=admindata(request)
+    return render(request,'user/contact.html',{'admin':admin})
+
+def contact(request):
+    return render(request,'contact.html')
+
+def productview(request):
+    user=userdata(request)
+    proobj=crops.objects.all()
+    return render(request,'user/productview.html',{'user':user},{'product':proobj})
 
 def userdata(request):
     try:
@@ -135,14 +161,13 @@ def login(request):
 
                         return render(request,'login.html',{'status':'Wrong User Password Try Again ....'})
             
-            except:
-                
+            except Exception as e:
+                print(e)
                 return render(request,'login.html',{'status':'Oops User not in our database ....'})
 
     return render(request,'login.html')
 
 
-    
 
 def soiltest(request):
     # user=userregister.objects.get(uname=request.session('sessionid'))
@@ -152,7 +177,7 @@ def soiltest(request):
 
 def soilPredictionDb(request):
     data=pd.read_csv("media/data/predictData.csv")
-    croplist=["coconut","Mango","Jackfruit","Onion",]
+    croplist=["coconut","Mango","Jackfruit","Onion","cumcumber"]
     print(data)
     x=data.iloc[:,[0,1,2,3,4,5,6,7,8]].values
     print(x)
@@ -232,6 +257,24 @@ def weatherPredictionDb(request):
     user = userdata(request)
     return render(request,'user/weathertest.html',{'user':user,'result':result})
     # return render(request, 'user/weathertest.html', {'result': result})
+
+def addproduct(request):
+    admin=admindata(request)
+    return render(request,'admin/addproduct.html',{'admin':admin})
+
+def addItemdb(request):
+
+    if request.method=='POST' and request.FILES['pic']:
+        uploaded_file=request.FILES['pic']
+        fs=FileSystemStorage()
+        fname=uploaded_file.name
+        filename=fs.save(fname,uploaded_file)
+        uploaded_file_url=fs.url(filename)
+        db=crops(pname=request.POST.get('pname'),price=request.POST.get('price'),img=uploaded_file_url,desc=request.POST.get('desc'),)
+        db.save()
+    return adminhome(request)
+
+
 
 
 

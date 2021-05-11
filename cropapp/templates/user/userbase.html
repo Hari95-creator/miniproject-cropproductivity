@@ -2,7 +2,7 @@
 {% load static %}
 <html lang="en">
   <head>
-    <title>{% block title %} {% endblock %}</title>
+    <title>{% block title %} Krishiworld{% endblock %}</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -34,7 +34,7 @@
 
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
 	    <div class="container">
-	      <a class="navbar-brand" href="/index">Farmer's E Market</a>
+	      <a class="navbar-brand" href="/index">Krishi World</a>
 	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 	        <span class="oi oi-menu"></span> Menu
 	      </button>
@@ -62,11 +62,13 @@
               </div>
 
             </li>
-
+  
 	          <li class="nav-item"><a href="/managecrops" class="nav-link">Crops</a></li>
-            <li class="nav-item"><a href="/msg" class="nav-link">Messages</a></li>
+            <!-- <li class="nav-item"><a href="/msg" class="nav-link">Messages</a></li> -->
+            <li class="nav-item cta cta-colored"><a href="/message" class="nav-link"><span class="icon-envelope"></span><label id="cartcount">[]</label></a></li>
+
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="shop" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Hey ,{{ user.uname}}!</a>
+              <a class="nav-link dropdown-toggle" href="shop" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Hey ,{{ user.fname}}{{user.lname}}!</a>
               <div class="dropdown-menu" aria-labelledby="dropdown04">
                 <a class="dropdown-item" href="orderhistory">Order History</a>
                 <a class="dropdown-item" href="changeaddress">Change Address</a>
@@ -115,7 +117,7 @@
         <div class="row mb-5">
           <div class="col-md">
             <div class="ftco-footer-widget mb-4">
-              <h2 class="ftco-heading-2">Farmer's E Market</h2>
+              <h2 class="ftco-heading-2">Krishi world</h2>
               <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia.</p>
               <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
                 <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
@@ -130,11 +132,8 @@
               <ul class="list-unstyled">
                 <li><a href="shop" class="py-2 d-block">Shop</a></li>
 
-                <li><a href="/farmers/login" class="py-2 d-block">Farmer's Section</a></li>
-
-                <li><a href="about" class="py-2 d-block">About US</a></li>
-                <li><a href="ourfarmers" class="py-2 d-block">Our Farmers</a></li>
-                <li><a href="contact" class="py-2 d-block">Contact Us</a></li>
+                <li><a href="/aboutuser" class="py-2 d-block">About US</a></li>
+                <li><a href="/contactuser" class="py-2 d-block">Contact Us</a></li>
               </ul>
             </div>
           </div>

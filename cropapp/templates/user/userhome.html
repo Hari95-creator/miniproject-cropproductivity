@@ -1,39 +1,262 @@
 {% extends 'user/userbase.html' %}
 {% load static %}
-{% block slider %}
-    <section id="home-section" class="hero">
-    <div class="home-slider owl-carousel">
-    <div class="slider-item" style="background-image: url({% static 'images/bg_1.jpg' %});">
-        <div class="overlay"></div>
-      <div class="container">
-        <div class="row slider-text justify-content-center align-items-center" data-scrollax-parent="true">
 
-          <div class="col-md-12 ftco-animate text-center">
-            <h1 class="mb-2">We serve Fresh Vegestables &amp; Fruits</h1>
-            <h2 class="subheading mb-4">We deliver organic vegetables &amp; fruits</h2>
-            <p><a href="shop" class="btn btn-primary">Shop now</a></p>
-          </div>
 
-        </div>
-      </div>
-    </div>
+ {% block Content1 %}
+ <section class="ftco-section">
+ <div class="container">
+     <div class="row justify-content-center">
+         <div class="col-md-10 mb-5 text-center">
+             <ul class="nav nav-pills nav-fill nav-tabs nav-justified " id="myTab" role="tablist">
+                 <li class="nav-item">
+                     <a class="nav-link  active  " id="All-tab" data-toggle="tab" href="#All" role="tab"
+                        aria-controls="All" aria-selected="true">All</a>
+                 </li>
+                 <li class="nav-item">
+                     <a class="nav-link " id="Vegetables-tab" data-toggle="tab" href="#Vegetables" role="tab"
+                        aria-controls="Vegetables" aria-selected="false">Vegetables</a>
+                 </li>
 
-    <div class="slider-item" style="background-image: url({% static 'images/bg_2.jpg' %});">
-        <div class="overlay"></div>
-      <div class="container">
-        <div class="row slider-text justify-content-center align-items-center" data-scrollax-parent="true">
 
-          <div class="col-sm-12 ftco-animate text-center">
-            <h1 class="mb-2">100% Fresh &amp; Organic Foods</h1>
-            <h2 class="subheading mb-4">We deliver organic vegetables &amp; fruits</h2>
-            <p><a href="shop" class="btn btn-primary">Shop now</a></p>
-          </div>
+                 <li class="nav-item">
+                     <a class="nav-link " id="Fruits-tab" data-toggle="tab" href="#Fruits" role="tab"
+                        aria-controls="Fruits" aria-selected="false">Fruits</a>
+                 </li>
+                 <li class="nav-item">
+                     <a class="nav-link " id="Products-tab" data-toggle="tab" href="#Products" role="tab"
+                        aria-controls="Products" aria-selected="false">Products</a>
+                 </li>
+                 <li class="nav-item">
+                     <a class="nav-link " id="Dried-tab" data-toggle="tab" href="#Dried" role="tab"
+                        aria-controls="Dried" aria-selected="false">Dried</a>
+                 </li>
+             </ul>
+         </div>
+     </div>
 
-        </div>
-      </div>
-    </div>
-  </div>
+     <div class="tab-content" id="myTabContent">
+         <div class="tab-pane fade  show active " id="All" role="tabpanel" aria-labelledby="All-tab">
+             <div class="row">
+
+
+                 <div class="col-md-6 col-lg-3 ftco-animate">
+                     <div class="product">
+                         <a href="#" class="img-prod"><img class="img-fluid"
+                                                           src="{% static 'images/seeds/barley-cover-crop-sm_large.jpg' %}"
+                                                           alt="Colorlib Template">
+                             <span class="status">on offer</span>
+                             <div class="overlay"></div>
+                         </a>
+                         <div class="text py-3 pb-4 px-3 text-center">
+                             <h3><a href="#">Onion</a></h3>
+                             <div class="d-flex">
+                                 <div class="pricing">
+                                     <p class="price"><span class="mr-2 price-dc">₹30</span><span class="price-sale">₹25</span>
+                                     </p>
+                                 </div>
+                             </div>
+                             <div class="bottom-area d-flex px-3">
+                                 <div class="m-auto d-flex">
+                                     <a href="/product?id=1"
+                                        class="product-details d-flex justify-content-center align-items-center text-center">
+                                         <span><i class="ion-ios-menu"></i></span>
+                                     </a>
+
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+
+
+                 <div class="col-md-6 col-lg-3 ftco-animate">
+                     <div class="product">
+                         <a href="#" class="img-prod"><img class="img-fluid" src="{% static 'images/stock/bg.jpg' %}"
+                                                           alt="Colorlib Template">
+
+                             <div class="overlay"></div>
+                         </a>
+                         <div class="text py-3 pb-4 px-3 text-center">
+                             <h3><a href="#">Apple</a></h3>
+                             <div class="d-flex">
+                                 <div class="pricing">
+                                     <p class="price"><span class="price-sale">₹100</span></p>
+                                 </div>
+                             </div>
+                             <div class="bottom-area d-flex px-3">
+                                 <div class="m-auto d-flex">
+                                     <a href="/product?id=2"
+                                        class="product-details d-flex justify-content-center align-items-center text-center">
+                                         <span><i class="ion-ios-menu"></i></span>
+                                     </a>
+
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+
+
+                 <div class="col-md-6 col-lg-3 ftco-animate">
+                     <div class="product">
+                         <a href="#" class="img-prod"><img class="img-fluid" src="{% static 'images/stock/bg.jpg' %}" alt="Colorlib Template">
+                             <span class="status">on offer</span>
+                             <div class="overlay"></div>
+                         </a>
+                         <div class="text py-3 pb-4 px-3 text-center">
+                             <h3><a href="#">Almond</a></h3>
+                             <div class="d-flex">
+                                 <div class="pricing">
+                                     <p class="price"><span class="mr-2 price-dc">₹150</span><span
+                                             class="price-sale">₹125</span></p>
+                                 </div>
+                             </div>
+                             <div class="bottom-area d-flex px-3">
+                                 <div class="m-auto d-flex">
+                                     <a href="/product?id=3"
+                                        class="product-details d-flex justify-content-center align-items-center text-center">
+                                         <span><i class="ion-ios-menu"></i></span>
+                                     </a>
+
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+
+
+             </div>
+
+         </div>
+         <div class="tab-pane fade " id="Vegetables" role="tabpanel" aria-labelledby="Vegetables-tab">
+             <div class="row">
+
+
+                 <div class="col-md-6 col-lg-3 ftco-animate">
+                     <div class="product">
+                         <a href="#" class="img-prod"><img class="img-fluid" src="{% static 'images/stock/bg.jpg' %}"
+                                                           alt="Colorlib Template">
+
+                             <span class="status">on offer</span>
+
+                             <div class="overlay"></div>
+                         </a>
+                         <div class="text py-3 pb-4 px-3 text-center">
+                             <h3><a href="#">Onion</a></h3>
+                             <div class="d-flex">
+                                 <div class="pricing">
+                                     <p class="price"><span class="mr-2 price-dc">₹30</span><span class="price-sale">₹25</span>
+                                     </p>
+                                 </div>
+                             </div>
+                             <div class="bottom-area d-flex px-3">
+                                 <div class="m-auto d-flex">
+                                     <a href="/product?id=1"
+                                        class="product-details d-flex justify-content-center align-items-center text-center">
+                                         <span><i class="ion-ios-menu"></i></span>
+                                     </a>
+
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+
+
+             </div>
+
+         </div>
+         <div class="tab-pane fade " id="Fruits" role="tabpanel" aria-labelledby="Fruits-tab">
+             <div class="row">
+
+
+                 <div class="col-md-6 col-lg-3 ftco-animate">
+                     <div class="product">
+                         <a href="#" class="img-prod"><img class="img-fluid" src="{% static 'images/stock/bg.jpg' %}"
+                                                           alt="Colorlib Template">
+
+                             <div class="overlay"></div>
+                         </a>
+                         <div class="text py-3 pb-4 px-3 text-center">
+                             <h3><a href="#">Apple</a></h3>
+                             <div class="d-flex">
+                                 <div class="pricing">
+                                     <p class="price"><span class="price-sale">₹100</span></p>
+                                 </div>
+                             </div>
+                             <div class="bottom-area d-flex px-3">
+                                 <div class="m-auto d-flex">
+                                     <a href="/product?id=2"
+                                        class="product-details d-flex justify-content-center align-items-center text-center">
+                                         <span><i class="ion-ios-menu"></i></span>
+                                     </a>
+
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+
+
+             </div>
+
+         </div>
+         <div class="tab-pane fade " id="Products" role="tabpanel" aria-labelledby="Products-tab">
+             <div class="row">
+
+
+                 <div class="col-md-12 heading-section text-center ftco-animate">
+                     <h4>No Products Found Near You..!</h4>
+                 </div>
+
+
+             </div>
+
+         </div>
+         <div class="tab-pane fade " id="Dried" role="tabpanel" aria-labelledby="Dried-tab">
+             <div class="row">
+
+
+                 <div class="col-md-6 col-lg-3 ftco-animate">
+                     <div class="product">
+                         <a href="#" class="img-prod"><img class="img-fluid" src="{% static 'images/stock/bg.jpg' %}"
+                                                           alt="Colorlib Template">
+
+                             <span class="status">on offer</span>
+
+                             <div class="overlay"></div>
+                         </a>
+                         <div class="text py-3 pb-4 px-3 text-center">
+                             <h3><a href="#">Almond</a></h3>
+                             <div class="d-flex">
+                                 <div class="pricing">
+                                     <p class="price"><span class="mr-2 price-dc">₹150</span><span
+                                             class="price-sale">₹125</span></p>
+                                 </div>
+                             </div>
+                             <div class="bottom-area d-flex px-3">
+                                 <div class="m-auto d-flex">
+                                     <a href="/product?id=3"
+                                        class="product-details d-flex justify-content-center align-items-center text-center">
+                                         <span><i class="ion-ios-menu"></i></span>
+                                     </a>
+
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+
+
+             </div>
+
+         </div>
+     </div>
+
+
+ </div>
+
+
 </section>
-
-{% endblock %}
+ {% endblock %}
 

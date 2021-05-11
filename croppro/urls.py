@@ -24,6 +24,12 @@ from cropapp import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('index/',views.index),
+    path('about/',views.about),
+    path('aboutuser/',views.aboutuser),
+    path('aboutadmin/',views.aboutadmin),
+    path('contactuser/',views.contactuser),
+    path('contactadmin/',views.contactadmin),
+    path('contact/',views.contact),
     path('adminbase/',views.adminbase),
     path('userbase/',views.userbase),
     path('signuppage/',views.signup),
@@ -36,6 +42,9 @@ urlpatterns = [
     path('weatherprediction/',views.weatherPredictionDb),
     path('userhome/',views.userhome),
     path('adminhome/',views.adminhome),
+    path('addproduct/',views.addproduct),
+    path('additemdb/',views.addItemdb),
+    path('productview/',views.productview),
 
 
 
