@@ -1,423 +1,159 @@
 {% extends 'user/userbase.html' %}
 {% load static %}
 {% block Content1 %}
- <div class="hero-wrap hero-bread" style="background-image: url('{% static '/images/bg_n2.jpg' %}');">
-      <div class="container">
-        <div class="row no-gutters slider-text align-items-center justify-content-center">
-          <div class="col-md-9 ftco-animate text-center">
-            <p class="breadcrumbs"><span class="mr-2">Freshly</span> <span>Plucked</span></p>
-            <h1 class="mb-0 bread">Products</h1>
-          </div>
-        </div>
+
+<div class="hero-wrap hero-bread" style="background-image: url('/static/images/bg_n1.jpg');">
+  <div class="container">
+    <div class="row no-gutters slider-text align-items-center justify-content-center">
+      <div class="col-md-9 ftco-animate text-center">
+        <p class="breadcrumbs"><span class="mr-2">Freshly</span> <span>Plucked</span></p>
+        <h1 class="mb-0 bread">Product</h1>
       </div>
     </div>
+  </div>
+</div>
+<section class="ftco-section">
+   
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6 mb-5 ftco-animate">
+        <a href="/media/products/pics/images.jpg" class="image-popup"><img src="{{view.img}}" class="img-fluid" alt="Colorlib Template"></a>
+      </div>
+      <div class="col-lg-6 product-details pl-md-5 ftco-animate">
+    
+        <h3>{{view.pname}}</h3>
+                <div class="col-md-12">
+        <div class="rating d-flex">
+          <p class="text-left mr-4">
+            <a href="#" class="mr-2">0.0</a>      
+                            
+                                
+                            
+                            
+                            
+                                  
+                                    <a href="#"><span class="ion-ios-star-outline"></span></a>
+                                  
+                                    <a href="#"><span class="ion-ios-star-outline"></span></a>
+                                  
+                                    <a href="#"><span class="ion-ios-star-outline"></span></a>
+                                  
+                                    <a href="#"><span class="ion-ios-star-outline"></span></a>
+                                  
+                                    <a href="#"><span class="ion-ios-star-outline"></span></a>
+                                
+                            
+                           
+          </p>
+          <p class="text-left mr-4">
+            <a href="#" class="mr-2" style="color: #000;">0 <span style="color: #bbb;">Rating</span></a>
+          </p>
+          <p class="text-left" >
+            <a href="#" class="mr-2" style="color: #000;">0 <span style="color: #bbb;">Sold</span></a>
+          </p>
+                      
+        </div>
+            
+          
+                <p class="price"><span class="ftco-heading-2"><br>₹{{view.price}}</span></p>
+                <p><span class="ftco-heading-2"><b>Description</b> : </span><a href="#">{{view.desc}}</a></p>
 
-    <section class="ftco-section">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-md-10 mb-5 text-center">
-                    <ul class="nav nav-pills nav-fill nav-tabs nav-justified " id="myTab" role="tablist">
-                      <li class="nav-item">
-                        <a class="nav-link {% if cat == 'All' %} active {% endif %} " id="All-tab" data-toggle="tab" href="#All" role="tab" aria-controls="All" aria-selected="true">All</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link {% if cat == 'Vegetables' %} active {% endif %}" id="Vegetables-tab" data-toggle="tab" href="#Vegetables" role="tab" aria-controls="Vegetables" aria-selected="false">Vegetables</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link {% if cat == 'Fruits' %} active {% endif %}" id="Fruits-tab" data-toggle="tab" href="#Fruits" role="tab" aria-controls="Fruits" aria-selected="false">Fruits</a>
-                      </li>
-                        <li class="nav-item">
-                        <a class="nav-link {% if cat == 'Products' %} active {% endif %}" id="Products-tab" data-toggle="tab" href="#Products" role="tab" aria-controls="Products" aria-selected="false">Products</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link {% if cat == 'Dried' %} active {% endif %}" id="Dried-tab" data-toggle="tab" href="#Dried" role="tab" aria-controls="Dried" aria-selected="false">Dried</a>
-                      </li>
-                    </ul>
-                </div>
+                <!-- <p>Freshly plucked from apple forest</p>
+                <p><span class="ftco-heading-2"><b>Produced by</b> : </span><a href="farmerdetails?id=3">Akhil</a></p>
+                <p><span class="ftco-heading-2"><b>Place</b> : </span> Thiruvananthapuram,IN</p>
+             <p><span class="ftco-heading-2"><b>Total Stock</b> : </span>10</p> -->
+                 <div class="input-group col-md-6 d-flex mb-3">
+                <!-- <span class="input-group-btn mr-2">
+                    <button type="button" class="quantity-left-minus btn"  data-type="minus" data-field="">
+                   <i class="ion-ios-remove"></i>
+                    </button>
+                    </span>
+                <input type="text"  id="quantity" name="quantity" class="form-control input-number" value="1" min="1" max="10">
+                <span class="input-group-btn ml-2">
+                    <button type="button" class="quantity-right-plus btn" data-type="plus" data-id="10">
+                     <i class="ion-ios-add"></i>
+                 </button>
+                </span> -->
             </div>
-            <div class="tab-content" id="myTabContent">
-              <div class="tab-pane fade {% if cat == 'product' %} show active {% endif %}" id="All" role="tabpanel" aria-labelledby="All-tab"><div class="row">
-                {% if All %}
-                 {% for pro in All %} 
+        </div>
+
+        <p>
+          <form action="/buynow/" method="POST">
+            {% csrf_token %}
+            <input type="number" name="proid" value="{{view.pid}}" hidden>
+            <table>
+            <tr>
+              <th>Quantity<br /><br /></th>
+              <td><input type="number" name="q1" id="q1" value="" onkeyup="getprice()" /><br /><br /></td>
+          </tr>
+            </table>
+          <input  type="submit" value="Buy Now"class="btn btn-black py-3 px-5">
+
+            <!-- <a href="plogin" type="submit" class="btn btn-black py-3 px-5">Buy</a> -->
+          </form>
+        </p>
+      <!-- </form> -->
+  </div>
+    </div>
+  </div>
+  
+    <div  class="container">
+        <div class="row" id="post-review-box" style="display:none;">
+                            <div class="col-md-12">
+                        
+                                    <input id="ratings-hidden" name="rating1" type="hidden"> 
+                                    <textarea class="form-control animated" cols="50" id="new-review" name="comment" placeholder="Enter your review here..." rows="5" maxlength="199"></textarea>
+                    
+                                    <div class="text-right">
+                                        <div class="fa fa-star checked" data-rating="0"></div>
+                                        
+
+                                    <fieldset class="rating" name="rating1" >
+                                        <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"><span class="ion-ios-star"></span></label>
+                                        <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"><span class="ion-ios-star"></span></label>
+                                        <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"><span class="ion-ios-star"></span></label>
+                                        <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"><span class="ion-ios-star"></span></label>
+                                        <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"><span class="ion-ios-star"></span></label>
+                                       
+                                    </fieldset>
+
+                                        <a class="btn btn-danger btn-sm" href="#" id="close-review-box" style="display:none; margin-right: 10px;">
+
+                                        <span class="glyphicon glyphicon-remove"></span>Cancel</a>
+                                        <button class="btn btn-success btn-lg add-review" data-id="2" >Save</button>
+                                    </div>
+                                
+                           
+
+            </div>   
+    </div>
+</div>
+</section>
+
+ <section class="ftco-section1">
+    <div class="container">
+        <div class="row justify-content-center">
+      <div class="heading-section text-center ftco-animate">
+<h2 class="mb-4">Product Reviews</h2></div></div></div>
+<div  class="container" id="overflowTest">
+
+    <!-- comments container -->
+            <div class="comment_block">
+             <!-- new comment -->
+             <div class="new_comment">
                 
 
-                <div class="col-md-6 col-lg-3 ftco-animate">
-                    <div class="product">
-                        <a href="#" class="img-prod"><img class="img-fluid" src="{{ pro.img.url}}" alt="Colorlib Template">
-                            {% if pro.offer %}
-                            <span class="status">on offer</span>
-                            {% endif %}
-                            <div class="overlay"></div>
-                        </a>
-                        <div class="text py-3 pb-4 px-3 text-center">
-                            <h3><a href="#">{{ pro.pname }}</a></h3>
-                            <div class="d-flex">
-                                <div class="pricing">
-                                    {% if pro.offer %}<p class="price"><span class="mr-2 price-dc">₹{{ pro.price }}</span><span class="price-sale">₹{{ pro.offerprice }}</span> </p>{% else %}<p class="price"><span class="price-sale">₹{{ pro.price }}</span> </p>{% endif %}
-                                </div>
-                            </div>
-                            <div class="bottom-area d-flex px-3">
-                                <div class="m-auto d-flex">
-                                    <a href="/product?id={{ pro.id }}" class="product-details d-flex justify-content-center align-items-center text-center">
-                                        <span><i class="ion-ios-menu"></i></span>
-                                    </a>
-                                    {% if user.is_authenticated %}
-                                    <a href="#" id="addcart" data-id="{{ pro.id }}" class="add-to-cart d-flex justify-content-center align-items-center mx-1">
-                                        <span id="addcart"><i id="addcart{{ pro.id }}"class="ion-ios-cart"></i></span>
-                                    </a>
-                                    <a href="#" id="addwish" data-id="{{ pro.id }}" class="add-to-wish heart d-flex justify-content-center align-items-center ">
-                                        <span id="addwish"><i id="addwish{{ pro.id }}" class="ion-ios-heart"></i></span>
-                                    </a>
-                                    {% endif %}
-                                </div>
-                            </div>
-                        </div>
+                 <ul class="user_comment">
+
+                    <div class="comment_body">
+                        <p><span class="ftco-heading-2"><b>No Reviews yet..!</b></p>
                     </div>
-                </div>
-                {% endfor %}  
-                {% else %}
-                 <div class="col-md-12 heading-section text-center ftco-animate">
-            <h4>No Products Found Near You..!</h4>
-          </div>
-                {% endif %} 
-            </div>
-            {% if All.has_other_pages %}
-  <div class="row mt-5">
-          <div class="col text-center">
-            <div class="block-27">
-                <ul>
-    {% if All.has_previous %}
-      <li><a href="?apage={{ All.previous_page_number }}&cat=All">&laquo;</a></li>
-    {% else %}
-      <li class="disabled"><span>&laquo;</span></li>
-    {% endif %}
-    {% for i in All.paginator.page_range %}
-      {% if All.number == i %}
-        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
-      {% else %}
-        <li><a href="?apage={{ i }}&cat=All">{{ i }}</a></li>
-      {% endif %}
-    {% endfor %}
-    {% if All.has_next %}
-      <li><a href="?apage={{ All.next_page_number }}&cat=All">&raquo;</a></li>
-    {% else %}
-      <li class="disabled"><span>&raquo;</span></li>
-    {% endif %}
-  </ul>
-  </div>
-          </div>
-        </div>
-        
-{% endif %}
-        </div>
-              <div class="tab-pane fade {% if cat == 'Vegetables' %} show active {% endif %}" id="Vegetables" role="tabpanel" aria-labelledby="Vegetables-tab">
-                <div class="row">
-                    {% if Vegetables %}
-                 {% for pro in Vegetables %} 
-                 
-                <div class="col-md-6 col-lg-3 ftco-animate">
-                    <div class="product">
-                        <a href="#" class="img-prod"><img class="img-fluid" src="{{ pro.img.url}}" alt="Colorlib Template">
-                            {% if pro.offer %}
-                            <span class="status">on offer</span>
-                            {% endif %}
-                            <div class="overlay"></div>
-                        </a>
-                        <div class="text py-3 pb-4 px-3 text-center">
-                            <h3><a href="#">{{ pro.pname }}</a></h3>
-                            <div class="d-flex">
-                                <div class="pricing">
-                                    {% if pro.offer %}<p class="price"><span class="mr-2 price-dc">₹{{ pro.price }}</span><span class="price-sale">₹{{ pro.offerprice }}</span> </p>{% else %}<p class="price"><span class="price-sale">₹{{ pro.price }}</span> </p>{% endif %}
-                                </div>
-                            </div>
-                            <div class="bottom-area d-flex px-3">
-                                <div class="m-auto d-flex">
-                                    <a href="/product?id={{ pro.id }}" class="product-details d-flex justify-content-center align-items-center text-center">
-                                        <span><i class="ion-ios-menu"></i></span>
-                                    </a>
-                                    {% if user.is_authenticated %}
-                                    <a href="#" id="addcart" data-id="{{ pro.id }}" class="add-to-cart d-flex justify-content-center align-items-center mx-1">
-                                        <span id="addcart"><i id="addcart{{ pro.id }}"class="ion-ios-cart"></i></span>
-                                    </a>
-                                    <a href="#" id="addwish" data-id="{{ pro.id }}" class="add-to-wish heart d-flex justify-content-center align-items-center ">
-                                        <span id="addwish"><i id="addwish{{ pro.id }}" class="ion-ios-heart"></i></span>
-                                    </a>
-                                    {% endif %}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {% endfor %} 
-            
-                {% else %}
-                <div class="col-md-12 heading-section text-center ftco-animate">
-            <h4>No Products Found Near You..!</h4>
-          </div>
-                {% endif %}
+                </ul>
                   
-            </div>
-            {% if Vegetables.has_other_pages %}
-  <div class="row mt-5">
-          <div class="col text-center">
-            <div class="block-27">
-                <ul>
-    {% if Vegetables.has_previous %}
-      <li><a href="?vpage={{ Vegetables.previous_page_number }}&cat=Vegetables">&laquo;</a></li>
-    {% else %}
-      <li class="disabled"><span>&laquo;</span></li>
-    {% endif %}
-    {% for i in Vegetables.paginator.page_range %}
-      {% if Vegetables.number == i %}
-        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
-      {% else %}
-        <li><a href="?vpage={{ i }}&cat=Vegetables">{{ i }}</a></li>
-      {% endif %}
-    {% endfor %}
-    {% if Vegetables.has_next %}
-      <li><a href="?vpage={{ Vegetables.next_page_number }}&cat=Vegetables">&raquo;</a></li>
-    {% else %}
-      <li class="disabled"><span>&raquo;</span></li>
-    {% endif %}
-  </ul>
-  </div>
-          </div>
-        </div>
-        
-{% endif %}
-        </div>
-              <div class="tab-pane fade {% if cat == 'Fruits' %} show active {% endif %}" id="Fruits" role="tabpanel" aria-labelledby="Fruits-tab">
-                <div class="row">
-                 
-                 {% if Fruits %}
-                    {% for pro in Fruits %} 
-                <div class="col-md-6 col-lg-3 ftco-animate">
-                    <div class="product">
-                        <a href="#" class="img-prod"><img class="img-fluid" src="{{ pro.img.url}}" alt="Colorlib Template">
-                            {% if pro.offer %}
-                            <span class="status">on offer</span>
-                            {% endif %}
-                            <div class="overlay"></div>
-                        </a>
-                        <div class="text py-3 pb-4 px-3 text-center">
-                            <h3><a href="#">{{ pro.pname }}</a></h3>
-                            <div class="d-flex">
-                                <div class="pricing">
-                                    {% if pro.offer %}<p class="price"><span class="mr-2 price-dc">₹{{ pro.price }}</span><span class="price-sale">₹{{ pro.offerprice }}</span> </p>{% else %}<p class="price"><span class="price-sale">₹{{ pro.price }}</span> </p>{% endif %}
-                                </div>
-                            </div>
-                            <div class="bottom-area d-flex px-3">
-                                <div class="m-auto d-flex">
-                                    <a href="/product?id={{ pro.id }}" class="product-details d-flex justify-content-center align-items-center text-center">
-                                        <span><i class="ion-ios-menu"></i></span>
-                                    </a>
-                                    {% if user.is_authenticated %}
-                                    <a href="#" id="addcart" data-id="{{ pro.id }}" class="add-to-cart d-flex justify-content-center align-items-center mx-1">
-                                        <span id="addcart"><i id="addcart{{ pro.id }}"class="ion-ios-cart"></i></span>
-                                    </a>
-                                    <a href="#" id="addwish" data-id="{{ pro.id }}" class="add-to-wish heart d-flex justify-content-center align-items-center ">
-                                        <span id="addwish"><i id="addwish{{ pro.id }}" class="ion-ios-heart"></i></span>
-                                    </a>
-                                    {% endif %}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {% endfor %} 
-                {% else %}
-                <div class="col-md-12 heading-section text-center ftco-animate">
-            <h4>No Products Found Near You..!</h4>
-          </div>
-                {% endif %}
-                  
-            </div>
-            {% if Fruits.has_other_pages %}
-  <div class="row mt-5">
-          <div class="col text-center">
-            <div class="block-27">
-                <ul>
-    {% if Fruits.has_previous %}
-      <li><a href="?fpage={{ Fruits.previous_page_number }}&cat=Fruits">&laquo;</a></li>
-    {% else %}
-      <li class="disabled"><span>&laquo;</span></li>
-    {% endif %}
-    {% for i in Fruits.paginator.page_range %}
-      {% if Fruits.number == i %}
-        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
-      {% else %}
-        <li><a href="?fpage={{ i }}&cat=Fruits">{{ i }}</a></li>
-      {% endif %}
-    {% endfor %}
-    {% if Fruits.has_next %}
-      <li><a href="?fpage={{ Fruits.next_page_number }}&cat=Fruits">&raquo;</a></li>
-    {% else %}
-      <li class="disabled"><span>&raquo;</span></li>
-    {% endif %}
-  </ul>
-  </div>
-          </div>
-        </div>
-       
-{% endif %}
-              </div>
-              <div class="tab-pane fade {% if cat == 'Products' %} show active {% endif %}" id="Products" role="tabpanel" aria-labelledby="Products-tab">
-                <div class="row">
-                 
-                 {% if Products %}
-                    {% for pro in Products %} 
-                <div class="col-md-6 col-lg-3 ftco-animate">
-                    <div class="product">
-                        <a href="#" class="img-prod"><img class="img-fluid" src="{{ pro.img.url}}" alt="Colorlib Template">
-                            {% if pro.offer %}
-                            <span class="status">on offer</span>
-                            {% endif %}
-                            <div class="overlay"></div>
-                        </a>
-                        <div class="text py-3 pb-4 px-3 text-center">
-                            <h3><a href="#">{{ pro.pname }}</a></h3>
-                            <div class="d-flex">
-                                <div class="pricing">
-                                    {% if pro.offer %}<p class="price"><span class="mr-2 price-dc">₹{{ pro.price }}</span><span class="price-sale">₹{{ pro.offerprice }}</span> </p>{% else %}<p class="price"><span class="price-sale">₹{{ pro.price }}</span> </p>{% endif %}
-                                </div>
-                            </div>
-                            <div class="bottom-area d-flex px-3">
-                                <div class="m-auto d-flex">
-                                    <a href="/product?id={{ pro.id }}" class="product-details d-flex justify-content-center align-items-center text-center">
-                                        <span><i class="ion-ios-menu"></i></span>
-                                    </a>
-                                    {% if user.is_authenticated %}
-                                    <a href="#" id="addcart" data-id="{{ pro.id }}" class="add-to-cart d-flex justify-content-center align-items-center mx-1">
-                                        <span id="addcart"><i id="addcart{{ pro.id }}"class="ion-ios-cart"></i></span>
-                                    </a>
-                                    <a href="#" id="addwish" data-id="{{ pro.id }}" class="add-to-wish heart d-flex justify-content-center align-items-center ">
-                                        <span id="addwish"><i id="addwish{{ pro.id }}" class="ion-ios-heart"></i></span>
-                                    </a>
-                                    {% endif %}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {% endfor %}  
-                {% else %}
-                <div class="col-md-12 heading-section text-center ftco-animate">
-            <h4>No Products Found Near You..!</h4>
-          </div>
-                {% endif %}
-                 
-            </div>
-            {% if Products.has_other_pages %}
-  <div class="row mt-5">
-          <div class="col text-center">
-            <div class="block-27">
-                <ul>
-    {% if Products.has_previous %}
-      <li><a href="?ppage={{ Products.previous_page_number }}&cat=Products">&laquo;</a></li>
-    {% else %}
-      <li class="disabled"><span>&laquo;</span></li>
-    {% endif %}
-    {% for i in Products.paginator.page_range %}
-      {% if Products.number == i %}
-        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
-      {% else %}
-        <li><a href="?ppage={{ i }}&cat=Products">{{ i }}</a></li>
-      {% endif %}
-    {% endfor %}
-    {% if Products.has_next %}
-      <li><a href="?ppage={{ Products.next_page_number }}&cat=Products">&raquo;</a></li>
-    {% else %}
-      <li class="disabled"><span>&raquo;</span></li>
-    {% endif %}
-  </ul>
-  </div>
-          </div>
-        </div>
-        
-{% endif %}
-              </div>
-              <div class="tab-pane fade {% if cat == 'Dried' %} show active {% endif %}" id="Dried" role="tabpanel" aria-labelledby="Dried-tab">
-                <div class="row">
-                 
-                 {% if Dried %}
-                   {% for pro in Dried %} 
-                <div class="col-md-6 col-lg-3 ftco-animate">
-                    <div class="product">
-                        <a href="#" class="img-prod"><img class="img-fluid" src="{{ pro.img.url}}" alt="Colorlib Template">
-                            {% if pro.offer %}
-                            <span class="status">on offer</span>
-                            {% endif %}
-                            <div class="overlay"></div>
-                        </a>
-                        <div class="text py-3 pb-4 px-3 text-center">
-                            <h3><a href="#">{{ pro.pname }}</a></h3>
-                            <div class="d-flex">
-                                <div class="pricing">
-                                    {% if pro.offer %}<p class="price"><span class="mr-2 price-dc">₹{{ pro.price }}</span><span class="price-sale">₹{{ pro.offerprice }}</span> </p>{% else %}<p class="price"><span class="price-sale">₹{{ pro.price }}</span> </p>{% endif %}
-                                </div>
-                            </div>
-                            <div class="bottom-area d-flex px-3">
-                                <div class="m-auto d-flex">
-                                    <a href="/product?id={{ pro.id }}" class="product-details d-flex justify-content-center align-items-center text-center">
-                                        <span><i class="ion-ios-menu"></i></span>
-                                    </a>
-                                    {% if user.is_authenticated %}
-                                    <a href="#" id="addcart" data-id="{{ pro.id }}" class="add-to-cart d-flex justify-content-center align-items-center mx-1">
-                                        <span id="addcart"><i id="addcart{{ pro.id }}"class="ion-ios-cart"></i></span>
-                                    </a>
-                                    <a href="#" id="addwish" data-id="{{ pro.id }}" class="add-to-wish heart d-flex justify-content-center align-items-center ">
-                                        <span id="addwish"><i id="addwish{{ pro.id }}" class="ion-ios-heart"></i></span>
-                                    </a>
-                                    {% endif %}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {% endfor %}
-                {% else %}
-                <div class="col-md-12 heading-section text-center ftco-animate">
-            <h4>No Products Found Near You..!</h4>
-          </div>
-                {% endif %}
-                   
-            </div>
-            {% if Dried.has_other_pages %}
-  <div class="row mt-5">
-          <div class="col text-center">
-            <div class="block-27">
-                <ul>
-    {% if Dried.has_previous %}
-      <li><a href="?dpage={{ Dried.previous_page_number }}&cat=Dried">&laquo;</a></li>
-    {% else %}
-      <li class="disabled"><span>&laquo;</span></li>
-    {% endif %}
-    {% for i in Dried.paginator.page_range %}
-      {% if Dried.number == i %}
-        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
-      {% else %}
-        <li><a href="?dpage={{ i }}&cat=Dried">{{ i }}</a></li>
-      {% endif %}
-    {% endfor %}
-    {% if Dried.has_next %}
-      <li><a href="?dpage={{ Dried.next_page_number }}&cat=Dried">&raquo;</a></li>
-    {% else %}
-      <li class="disabled"><span>&raquo;</span></li>
-    {% endif %}
-  </ul>
-  </div>
-          </div>
-        </div>
-       
-{% endif %}
-              </div>
-            </div>
-          
-
+             </div>
             </div>
 
+ </div>
 
- </section>
-            
-            
-  {% endblock %}
+</section>
+{% endblock %}

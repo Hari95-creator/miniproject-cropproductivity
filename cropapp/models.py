@@ -27,7 +27,7 @@ class orders(models.Model):
     pid = models.ForeignKey(crops,on_delete=models.CASCADE)
     pname = models.CharField(max_length=250)
     quantity = models.IntegerField()
-    price = models.IntegerField()
+    price = models.FloatField()
     card= models.CharField(max_length=15)
     fname= models.CharField(max_length=250)
     lname= models.CharField(max_length=250)
@@ -44,6 +44,7 @@ class account(models.Model):
     cardnum=models.CharField(max_length=60,unique=True)
     cvv=models.CharField(max_length=10)
     bal=models.IntegerField()
+    expdate=models.DateField(default='1995-01-01')
 
 class soilPrediction(models.Model):
     pno=models.AutoField(primary_key=True)

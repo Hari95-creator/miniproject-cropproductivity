@@ -1,0 +1,23 @@
+{% extends 'user/userbase.html' %}
+{% load static %}
+{% block Content1 %}
+<br><center><h2>ADD NEW CARD</h2></center>
+<form action="/addaccount/" method="post">
+    {% csrf_token %}
+
+    CARD NUMBER<br>
+    <input type="text" name="cnum" value="" required ><br><br>
+    CVV<br>
+    <input type="text" name="cvv" value=""   required  ><br><br>
+
+    EXPIRY DATE<br>
+    <input type="date" name="edate" value=""  required><br><br>
+
+    Amount<br/>
+    <input type="text" name="amnt" value=""   required  ><br><br>
+
+  
+
+<input type="submit" value="UPDATE">
+</form
+    {% endblock %}

@@ -1,0 +1,82 @@
+
+{% extends 'user/userbase.html' %}
+{% load static %}
+{% block Content1 %}
+
+<div class="hero-wrap hero-bread" style="background-image: url('{% static 'public/images/bg_1.jpg' %}');">
+    <div class="container">
+      <div class="row no-gutters slider-text align-items-center justify-content-center">
+        <div class="col-md-9 ftco-animate text-center">
+            <p class="breadcrumbs">new order</p>
+          <h1 class="mb-0 bread">requests</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="ftco-section ftco-cart">
+          <div class="container">
+              <div class="row">
+              <div class="col-md-12 ftco-animate">
+                  <div class="cart-list">
+                      <table class="table">
+                          <thead class="thead-primary">
+                            <tr class="text-center">
+                               <th>&nbsp;</th>
+                              <th>Product name</th>
+                              <th>Orderer</th>
+                              <th>Pay Mode</th>
+                              <th>Quantity</th>
+                              <th>&nbsp;</th>
+                              <th>&nbsp;</th>
+                            </tr>
+                          </thead>
+                          
+                          <tbody>
+                          
+                              {% if orderlist %}
+                              {% for item in orderlist %}
+                            <tr id="myElement" class="text-center">
+                              <td class="image-prod"><a href="/product?id={{ item.productid.id }}"><div class="img" style="background-image:url({{ item.productid.img.url}});"></div></a></td>
+                              
+                              <td class="product-name">
+                                  <h3>{{ item.productid.pname }}</h3>
+                                  <p>{{ item.productid.description }}</p>
+                              </td>
+                              <td class="product-name">
+                                  <a href="/farmers/orderdetails?id={{ item.id }}">
+                                      <h3>{{ item.userid.first_name }}</h3>
+                                      <p>{{ item.userid.userprofile.town }}</p>
+                                  </a>
+                              </td>
+                              <td class="price">{{ item.paymode }}</td>
+                              
+                              <td class="quantity">
+                                  <div class="input-group mb-3">
+                                   <input type="text" name="quantity" class="quantity form-control input-number" value="{{ item.quantity }}" min="1" max="100" readonly>
+                                </div>
+                            </td>
+                              
+                               <td ><p><a href="#" class="mark-as-delivered btn btn-primary" onclick="return false;" data-id="{{ item.id }}">Mark as Delivered</a></p></td>
+                              
+                            </tr><!-- END TR-->
+                           
+                            {% endfor %} 
+                            {% else %}
+                            <tr id="myElement" class="text-center">
+                              <td colspan="6">
+                                  <h4>No New Orders..!</h4>
+                              </td>
+                            </tr>
+                            {% endif %}  
+                          
+                          </tbody>
+
+                        </table>
+                    </div>
+              </div>
+          </div>
+          </div>
+      </section>
+
+    {% endblock %}

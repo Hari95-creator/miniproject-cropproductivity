@@ -45,6 +45,11 @@ urlpatterns = [
     path('addproduct/',views.addproduct),
     path('additemdb/',views.addItemdb),
     path('productview/',views.productview),
+    path('order/',views.order),
+    path('buynow/',views.buynow),
+    path('manageaccount/',views.manage_account),
+    path('addaccount/',views.userAddMoney),
+    path('placeorder/',views.placeOrder),
 
 
 

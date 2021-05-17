@@ -1,7 +1,8 @@
 import pandas as pd
+import datetime
 from sklearn.tree import DecisionTreeClassifier
 from cropapp.models import admin
-from cropapp.models import userregister,soilPrediction,weatherPrediction,crops
+from cropapp.models import userregister,soilPrediction,weatherPrediction,crops,account,orders
 from django.http.response import HttpResponse, JsonResponse
 from django.shortcuts import render
 from django.core.files.storage import FileSystemStorage
@@ -35,8 +36,9 @@ def contact(request):
 
 def productview(request):
     user=userdata(request)
-    proobj=crops.objects.all()
-    return render(request,'user/productview.html',{'user':user},{'product':proobj})
+    view=crops.objects.get(pid=request.POST.get("proid"))
+    print(view.pid)
+    return render(request,'user/productview.html',{'user':user,'view':view})
 
 def userdata(request):
     try:
@@ -107,7 +109,8 @@ def user_details(request):
 
 def userhome(request):
     user=userdata(request)
-    return render(request,'user/userhome.html',{'user':user})
+    cropview=crops.objects.all()
+    return render(request,'user/userhome.html',{'user':user,'cropview':cropview})
 
 def adminhome(request):
     admin=admindata(request)
@@ -273,6 +276,69 @@ def addItemdb(request):
         db=crops(pname=request.POST.get('pname'),price=request.POST.get('price'),img=uploaded_file_url,desc=request.POST.get('desc'),)
         db.save()
     return adminhome(request)
+
+def order(request):
+    return render(request,'user/order.html')
+
+def buynow(request):
+    user=userdata(request)
+    print(request.POST.get("proid"))
+    product=crops.objects.get(pid=request.POST.get("proid"))
+    total=float(request.POST.get('q1'))*float(product.price)
+    print('test',request.POST.get('q1'))
+    print('price:',product.price)
+    print("test1")
+    print('total:',total)
+    # print(request.POST.get("proid"))
+    return render(request,'user/buynow.html',{'pro':product,'total':total,'q1':request.POST.get('q1')})
+
+def manage_account(request):
+    return render(request,'user/account.html')
+
+def userAddMoney(request):
+    try:
+            db = account.objects.get(cardnum=request.POST.get('cnum'))
+            print(db.cardnum)
+            if db.cvv == request.POST.get('cvv') :
+                    print("same exp")
+                    db.bal += int(request.POST.get('amnt'))
+                    db.save()
+                    return manage_account(request)
+
+            else:
+                return HttpResponse("Exp or cvv incorrect")
+    except:
+        print(request.POST.get("edate"))
+        db = account(cardnum=request.POST.get('cnum'), cvv=request.POST.get('cvv'),bal=request.POST.get('amnt'),expdate=request.POST.get('edate'))
+        db.save()
+        return manage_account(request)
+
+def placeOrder(request):
+    udata = userdata(request)
+    tamount = float(request.POST.get('total'))
+    print("total==", tamount)
+    if account.objects.get(cardnum=request.POST.get('card')) is not None:
+        pay = account.objects.get(cardnum=request.POST.get('card'))
+        if pay.cvv != request.POST.get('cvv'):
+            return HttpResponse("incorrect CVV")
+        else:
+            print("tamountss==", tamount)
+            if float(pay.bal) < tamount:
+                return HttpResponse("Insufficient Balance")
+            else:
+                pay.bal = float(pay.bal) - float(tamount)
+                pay.save()
+
+    pro = crops.objects.get(pid=request.POST.get('pid'))
+    db = orders(uid=udata, pid=pro,pname=request.POST.get('pname'), quantity=request.POST.get('q1'),
+                price=request.POST.get('total'),fname=request.POST.get('fname') ,lname=request.POST.get('lname') ,
+                ph=request.POST.get('ph'), Add1=request.POST.get('add1'),Add2=request.POST.get('add2'),
+                Add3=request.POST.get('add3'), odate=datetime.datetime.now(),card=request.POST.get('card') )
+
+    db.save()
+
+    return HttpResponse("entered")
+   
 
 
 
