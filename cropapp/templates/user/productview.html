@@ -17,7 +17,7 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-6 mb-5 ftco-animate">
-        <a href="/media/products/pics/images.jpg" class="image-popup"><img src="{{view.img}}" class="img-fluid" alt="Colorlib Template"></a>
+        <a href="/media/products/pics/images.jpg" class="image-popup"><img src="{{view.img}}" class="img-fluid" alt="Colorlib Template" style="width: 500px;height: 500px;"></a>
       </div>
       <div class="col-lg-6 product-details pl-md-5 ftco-animate">
     
@@ -62,7 +62,7 @@
                 <p><span class="ftco-heading-2"><b>Produced by</b> : </span><a href="farmerdetails?id=3">Akhil</a></p>
                 <p><span class="ftco-heading-2"><b>Place</b> : </span> Thiruvananthapuram,IN</p>
              <p><span class="ftco-heading-2"><b>Total Stock</b> : </span>10</p> -->
-                 <div class="input-group col-md-6 d-flex mb-3">
+                 <!-- <div class="input-group col-md-6 d-flex mb-3"> -->
                 <!-- <span class="input-group-btn mr-2">
                     <button type="button" class="quantity-left-minus btn"  data-type="minus" data-field="">
                    <i class="ion-ios-remove"></i>
@@ -74,19 +74,21 @@
                      <i class="ion-ios-add"></i>
                  </button>
                 </span> -->
-            </div>
+            <!-- </div> -->
         </div>
 
         <p>
           <form action="/buynow/" method="POST">
             {% csrf_token %}
             <input type="number" name="proid" value="{{view.pid}}" hidden>
-            <table>
+            
+           <table>
             <tr>
               <th>Quantity<br /><br /></th>
-              <td><input type="number" name="q1" id="q1" value="" onkeyup="getprice()" /><br /><br /></td>
+              <td><input type="number" name="q1" id="q1" value="" ><br /><br /></td>
           </tr>
             </table>
+            
           <input  type="submit" value="Buy Now"class="btn btn-black py-3 px-5">
 
             <!-- <a href="plogin" type="submit" class="btn btn-black py-3 px-5">Buy</a> -->

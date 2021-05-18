@@ -23,6 +23,7 @@ from cropapp import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('',views.index),
     path('index/',views.index),
     path('about/',views.about),
     path('aboutuser/',views.aboutuser),
@@ -50,6 +51,20 @@ urlpatterns = [
     path('manageaccount/',views.manage_account),
     path('addaccount/',views.userAddMoney),
     path('placeorder/',views.placeOrder),
+    path('editproduct/',views.editproduct),
+    path('updatecrop/',views.updatecropdb),
+    path('orderdetail/',views.orderdetail),
+    path('manageOrder/',views.manageorder),
+    path('viewOldOrders/',views.viewOldOrders),
+    path('orderDetails/',views.orderDetails),
+    path('cancelOrder/',views.cancelOrder),
+    path('deletecrop/',views.deletecrop),
+    path('messagetoAdmin/',views.messagetoAdminPage),
+    path('messageDb/',views.messageDb),
+    path('adViewMessages/',views.adViewMessages),
+    path('qReplyDb/',views.qReplyDb),
+    path('logout/',views.logout),
+    
 
 
 

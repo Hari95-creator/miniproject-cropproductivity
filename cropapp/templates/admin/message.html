@@ -1,0 +1,29 @@
+{% extends 'admin/adminbasee.html' %}
+{% load static %}
+{% block Content1 %}
+<table border="">
+    <tr>
+        <th>User ID</th>
+        <th>Message</th>
+        <th>Reply</th>
+    </tr>
+    {% for x in msgs %}
+    <tr>
+        <td>{{x.uid_id}}</td>
+        <td>{{x.quest}}</td>
+        <td>{% if x.rep == "pending" %}
+            <form action="/qReplyDb/" method="post">{% csrf_token %}
+                <textarea name="qReply">       </textarea>
+                <input type="number" name="mid" value="{{x.mid}}" hidden><br>
+                <input type="submit" value="Send">
+            </form>
+            {% else %}
+            {{x.rep}}
+            {% endif %}
+        </td>
+    </tr>
+
+    {% endfor %}
+</table>
+
+{% endblock %}

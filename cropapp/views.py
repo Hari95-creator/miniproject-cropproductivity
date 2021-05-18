@@ -2,10 +2,11 @@ import pandas as pd
 import datetime
 from sklearn.tree import DecisionTreeClassifier
 from cropapp.models import admin
-from cropapp.models import userregister,soilPrediction,weatherPrediction,crops,account,orders
+from cropapp.models import userregister,soilPrediction,weatherPrediction,crops,account,orders,messages
 from django.http.response import HttpResponse, JsonResponse
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.core.files.storage import FileSystemStorage
+from django.db.models import Q
 
 # Create your views here.
 
@@ -114,7 +115,8 @@ def userhome(request):
 
 def adminhome(request):
     admin=admindata(request)
-    return render(request,'admin/adminhome.html',{'admin':admin})
+    cropdetail=crops.objects.all()
+    return render(request,'admin/adminhome.html',{'admin':admin,'cropview':cropdetail})
 
 def login(request):
     
@@ -290,10 +292,11 @@ def buynow(request):
     print("test1")
     print('total:',total)
     # print(request.POST.get("proid"))
-    return render(request,'user/buynow.html',{'pro':product,'total':total,'q1':request.POST.get('q1')})
+    return render(request,'user/buynow.html',{'pro':product,'total':total,'q1':request.POST.get('q1'),'user':user})
 
 def manage_account(request):
-    return render(request,'user/account.html')
+    user=userdata(request)
+    return render(request,'user/account.html',{'user':user})
 
 def userAddMoney(request):
     try:
@@ -338,7 +341,103 @@ def placeOrder(request):
     db.save()
 
     return HttpResponse("entered")
+
+def editproduct(request):
+    cropedit=crops.objects.get(pid=request.POST.get("proid"))
+    print("crops id",cropedit)
+    return render(request,'admin/editproduct.html',{'cropedit':cropedit})
+
+def updatecropdb(request):
+    db = crops.objects.get(pid=request.POST.get('proid'))
+    db.price = request.POST.get('price')
+    db.desc=request.POST.get('desc')
+    db.save()
+    return adminhome(request)
+
+def orderdetail(request):
+    udata = userregister.objects.all()
+    new = orders.objects.filter(Q(status='pending') | Q(status='Accepted'))
+    return render(request,'admin/orderdetail.html',{'list1': new, 'udata': udata})
+
+def manageorder(request):
+    ord = orders.objects.get(oid=request.POST.get('oid'))
+
+    if 'Accept' in request.POST:
+        ord.ddate = request.POST.get('exdate')
+        print("expdate=", ord.ddate)
+        if ord.ddate == '':
+            return HttpResponse("Please enter expected date of delivery")
+        ord.status = "Accepted"
+
+    else:
+        ord.ddate = datetime.datetime.now().strftime("%Y-%m-%d")
+        ord.status = "Delivered"
+    ord.save()
+    return orderdetail(request)
+
    
+def viewOldOrders(request):
+    udata = userregister.objects.all()
+    old = orders.objects.filter(status="Delivered")
+    return render(request, 'admin/finished.html', {'list2': old, 'udata': udata})
+
+def orderDetails(request):
+    udata = userdata(request)
+
+    crop=crops.objects.all()
+    ord=orders.objects.filter(uid=udata.id)
+    for x in ord:
+        print(x.oid)
+    return render(request,'user/orderDetails.html',{'Orders':ord,'pros':crop})
+
+def cancelOrder(request):
+    obj=orders.objects.get(oid=request.POST.get('oid'))
+    obj.status="Canceled"
+    obj.ddate=datetime.datetime.now().strftime("%Y-%m-%d")
+    acc=account.objects.get(cardnum=obj.card)
+    acc.bal=acc.bal+(obj.quantity*obj.price)
+    acc.save()
+    obj.save()
+    return userhome(request)
+
+def deletecrop(request):
+    try:
+        crops.objects.get(pid=request.POST.get('pid')).delete()
+        return adminhome(request)
+    except:
+        return adminhome(request)
+
+def messagetoAdminPage(request):
+    user=userdata(request)
+    msgs=messages.objects.filter(uid=user)
+    return render(request,'user/message.html',{'msgs':msgs,'user':user})
+
+def messageDb(request):
+    user = userdata(request)
+    db=messages(uid=user,quest=request.POST.get('quest'))
+    db.save()
+    return messagetoAdminPage(request)
+
+def adViewMessages(request):
+    msgs=messages.objects.all().order_by('-mid')
+    return render(request, 'admin/message.html',{"msgs":msgs})
+
+def qReplyDb(request):
+    msg=messages.objects.get(mid=request.POST.get('mid'))
+    msg.rep=request.POST.get('qReply')
+    msg.save()
+    return adViewMessages(request)
+def logout(request):
+    try:
+
+        #Session.objects.all().delete()
+        del request.session['sid']
+        del request.session['pwd']
+        return redirect('/index/')
+
+    except:
+        print('exception')
+        return redirect('/index/')
 
 
 

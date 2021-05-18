@@ -1,0 +1,33 @@
+{% extends 'user/userbase.html' %}
+{% load static %}
+{% block Content1 %}
+<center>
+    <div id="msg">
+        <div id="msg1">
+            <h2>
+                <font color="black"> Ask a question:</font>
+            </h2>
+            <form action="/messageDb/" method="post">{% csrf_token %}
+                <textarea name="quest" id="textmsg"></textarea>
+            <input type="number" name="uid" value="{{user.id}}" hidden/>
+            <input type="submit" value="send">
+            </form>
+
+        </div>
+        </div>
+  </center>
+</div><br><br/>
+  <center>
+      <h2>Previous messages with admin</h2><br><br/><br/>
+
+    <div>
+        <table border="">
+            <tr><th>Question</th><th>Reply</th></tr>
+            {% for x in msgs %}
+              <tr><td>{{x.quest}}</td><td>{{x.rep}}</td></tr>
+            {% endfor %}
+        </table>
+
+    </div>
+
+{% endblock %}

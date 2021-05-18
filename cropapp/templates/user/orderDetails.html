@@ -1,0 +1,45 @@
+{% extends 'user/userbase.html' %}
+{% load static %}
+{% block Content1 %}
+
+
+<table>
+{% for x in Orders %}
+    <tr>
+        <th>Product Id</th>
+        <td>: {{x.pid_id}}</td>
+    </tr>
+    <tr>
+        <th>Product name</th>
+        <td>: {{x.pname}}</td>
+    </tr>
+    <tr>
+        <th>Price</th>
+        <td>:
+            <script>document.write({{ x.price }}* {{ x.quantity }});</script>
+        </td>
+    </tr>
+    <tr>
+        <th>Order Status</th>
+        <td>: {{x.status}}</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>
+            <form method="post" action="/cancelOrder/">{% csrf_token %}
+                <input type="number" name="oid" value="{{x.oid}}" hidden>
+                {% if x.status == 'pending' %}
+                &nbsp&nbsp <input type="submit" name="Cancel" value="Cancel"><br><br>
+                <br>
+                {% elif x.status == 'Accepted' %}
+                Expected date of delivery:{{x.ddate}}
+                &nbsp&nbsp <input type="submit" name="Cancel" value="Cancel"><br><br>
+                {% elif x.status == 'Canceled' %}
+                Canceled on :{{x.ddate}}
+                {% else %}
+                Delivered on on {{x.ddate}}
+                {% endif %}
+            </form>
+    {% endfor %}
+</table>
+{% endblock %}

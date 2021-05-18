@@ -69,4 +69,10 @@ class weatherPrediction(models.Model):
     rain=models.FloatField()
     result=models.CharField(max_length=40)
 
+class messages(models.Model):
+    mid=models.AutoField(primary_key=True)
+    uid=models.ForeignKey(userregister,on_delete=models.CASCADE)
+    quest=models.TextField()
+    rep=models.TextField(default='pending')
+
 

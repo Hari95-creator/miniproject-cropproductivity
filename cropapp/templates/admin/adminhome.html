@@ -19,7 +19,7 @@
   </div>
 
   <div class="slider-item" style="background-image: url({% static 'images/bg_n2.jpg' %});">
-      <div class="overlay"></div>
+      <div class="overlay">
     <div class="container">
       <div class="row slider-text justify-content-center align-items-center" data-scrollax-parent="true">
 
@@ -52,3 +52,50 @@
 </div>
 
 {% endblock %}                  
+
+{% block Content2 %}
+<section class="ftco-section">
+<div class="container">
+<div class="tab-content" id="myTabContent">
+  <div class="tab-pane fade  show active " id="All" role="tabpanel" aria-labelledby="All-tab">
+      <div class="row">
+
+         
+         {% for pro in cropview %}
+          <div class="col-md-6 col-lg-3 ftco-animate">
+              <div class="product">
+                  <a href="#" class="img-prod"><img class="img-fluid"
+                                                    src="{{pro.img}}"
+                                                    alt="Colorlib Template" style="width:250px; height: 250px;">
+                      <!-- <span class="status">on offer</span> -->
+                      <div class="overlay"></div>
+                  </a>
+                  <div class="text py-3 pb-4 px-3 text-center">
+                      <h3><a href="#">{{pro.pname}}</a></h3>
+                      <div class="d-flex">
+                          <div class="pricing">
+                              <p class="price"><span class="price-sale">₹{{pro.price}}</span>
+                              </p>
+                          </div>
+                      </div>
+                      <div class="bottom-area d-flex px-3">
+                          <div class="m-auto d-flex">
+                              <form action ="/editproduct/" method="POST">
+                             {% csrf_token %}
+                             <input type="number" value="{{pro.pid}}" name="proid" hidden>
+                              
+                                 <input type="submit"   class="btn btn-success" value="View">
+                                  <!-- <span><i class="ion-ios-menu"></i></span> -->
+                              
+                              </form>
+
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          {% endfor %}
+      </div>
+  </div>
+
+{% endblock %}
