@@ -3,36 +3,36 @@
 {% block slider %}
 <section id="home-section" class="hero">
   <div class="home-slider owl-carousel">
-  <div class="slider-item" style="background-image: url({% static 'images/bg_n1.jpg' %});">
+    <div class="slider-item" style="background-image: url({% static 'images/bg_n1.jpg' %});">
       <div class="overlay"></div>
-    <div class="container">
-      <div class="row slider-text justify-content-center align-items-center" data-scrollax-parent="true">
+      <div class="container">
+        <div class="row slider-text justify-content-center align-items-center" data-scrollax-parent="true">
 
-        <div class="col-md-12 ftco-animate text-center">
-          <h1 class="mb-2">We are here to help you in Farming </h1>
-          <h2 class="subheading mb-4">We can develop organic vegetables &amp; fruits</h2>
-          <p><a href="shop" class="btn btn-primary">Shop now</a></p>
+          <div class="col-md-12 ftco-animate text-center">
+            <h1 class="mb-2">We are here to help you in Farming </h1>
+            <h2 class="subheading mb-4">We can develop organic vegetables &amp; fruits</h2>
+            <p><a href="shop" class="btn btn-primary">Shop now</a></p>
+          </div>
+
         </div>
-
       </div>
     </div>
-  </div>
 
-  <div class="slider-item" style="background-image: url({% static 'images/bg_n2.jpg' %});">
+    <div class="slider-item" style="background-image: url({% static 'images/bg_n2.jpg' %});">
       <div class="overlay">
-    <div class="container">
-      <div class="row slider-text justify-content-center align-items-center" data-scrollax-parent="true">
+        <div class="container">
+          <div class="row slider-text justify-content-center align-items-center" data-scrollax-parent="true">
 
-        <div class="col-sm-12 ftco-animate text-center">
-          <h1 class="mb-2">Let's Farm Together for you &amp; Nation</h1>
-          <h2 class="subheading mb-4">We can develop organic vegetables &amp; fruits</h2>
-          <p><a href="shop" class="btn btn-primary">Shop now</a></p>
+            <div class="col-sm-12 ftco-animate text-center">
+              <h1 class="mb-2">Let's Farm Together for you &amp; Nation</h1>
+              <h2 class="subheading mb-4">We can develop organic vegetables &amp; fruits</h2>
+              <p><a href="shop" class="btn btn-primary">Shop now</a></p>
+            </div>
+
+          </div>
         </div>
-
       </div>
     </div>
-  </div>
-</div>
 </section>
 
 {% endblock %}
@@ -41,61 +41,61 @@
 <br>
 <div class="col-md-6 col-lg-3 ftco-animate">
   <div class="product">
-      <a href="/addproduct/" class="img-prod"><img class="img-fluid" src="{% static '/images/plus.png' %}" alt="Colorlib Template">
-          <div class="overlay"></div>
-      </a>
-      <div class="text py-3 pb-4 px-3 text-center">
-          <h3><a href="/addproduct/">Add Product</a></h3>
-      </div>
-      <br>
+    <a href="/addproduct/" class="img-prod"><img class="img-fluid" src="{% static '/images/plus.png' %}"
+        alt="Colorlib Template">
+      <div class="overlay"></div>
+    </a>
+    <div class="text py-3 pb-4 px-3 text-center">
+      <h3><a href="/addproduct/">Add Product</a></h3>
+    </div>
+    <br>
   </div>
 </div>
 
-{% endblock %}                  
+{% endblock %}
 
 {% block Content2 %}
 <section class="ftco-section">
-<div class="container">
-<div class="tab-content" id="myTabContent">
-  <div class="tab-pane fade  show active " id="All" role="tabpanel" aria-labelledby="All-tab">
-      <div class="row">
+  <div class="container">
+    <div class="tab-content" id="myTabContent">
+      <div class="tab-pane fade  show active " id="All" role="tabpanel" aria-labelledby="All-tab">
+        <div class="row">
 
-         
-         {% for pro in cropview %}
+
+          {% for pro in cropview %}
           <div class="col-md-6 col-lg-3 ftco-animate">
-              <div class="product">
-                  <a href="#" class="img-prod"><img class="img-fluid"
-                                                    src="{{pro.img}}"
-                                                    alt="Colorlib Template" style="width:250px; height: 250px;">
-                      <!-- <span class="status">on offer</span> -->
-                      <div class="overlay"></div>
-                  </a>
-                  <div class="text py-3 pb-4 px-3 text-center">
-                      <h3><a href="#">{{pro.pname}}</a></h3>
-                      <div class="d-flex">
-                          <div class="pricing">
-                              <p class="price"><span class="price-sale">₹{{pro.price}}</span>
-                              </p>
-                          </div>
-                      </div>
-                      <div class="bottom-area d-flex px-3">
-                          <div class="m-auto d-flex">
-                              <form action ="/editproduct/" method="POST">
-                             {% csrf_token %}
-                             <input type="number" value="{{pro.pid}}" name="proid" hidden>
-                              
-                                 <input type="submit"   class="btn btn-success" value="View">
-                                  <!-- <span><i class="ion-ios-menu"></i></span> -->
-                              
-                              </form>
-
-                          </div>
-                      </div>
+            <div class="product">
+              <a href="#" class="img-prod"><img class="img-fluid" src="{{pro.img}}" alt="Colorlib Template"
+                  style="width:250px; height: 250px;">
+                <!-- <span class="status">on offer</span> -->
+                <div class="overlay"></div>
+              </a>
+              <div class="text py-3 pb-4 px-3 text-center">
+                <h3><a href="#">{{pro.pname}}</a></h3>
+                <div class="d-flex">
+                  <div class="pricing">
+                    <p class="price"><span class="price-sale">₹{{pro.price}}</span>
+                    </p>
                   </div>
+                </div>
+                <div class="bottom-area d-flex px-3">
+                  <div class="m-auto d-flex">
+                    <form action="/editproduct/" method="POST">
+                      {% csrf_token %}
+                      <input type="number" value="{{pro.pid}}" name="proid" hidden>
+
+                      <input type="submit" class="btn btn-success" value="View">
+                      <!-- <span><i class="ion-ios-menu"></i></span> -->
+
+                    </form>
+
+                  </div>
+                </div>
               </div>
+            </div>
           </div>
           {% endfor %}
+        </div>
       </div>
-  </div>
 
-{% endblock %}
+      {% endblock %}

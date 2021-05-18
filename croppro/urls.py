@@ -64,6 +64,10 @@ urlpatterns = [
     path('adViewMessages/',views.adViewMessages),
     path('qReplyDb/',views.qReplyDb),
     path('logout/',views.logout),
+    path('changeaddress/',views.changeaddress),
+    path('updateuser/',views.updateuser),
+    path('userupdate/', views.userpass),
+    
     
 
 

@@ -1,23 +1,69 @@
 {% extends 'user/userbase.html' %}
 {% load static %}
 {% block Content1 %}
-<br><center><h2>ADD NEW CARD</h2></center>
-<form action="/addaccount/" method="post">
-    {% csrf_token %}
+<div class="hero-wrap hero-bread" style="background-image: url('{% static '/images/bg_n1.jpg' %}');">
+    <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+            <div class="col-md-9 ftco-animate text-center">
+                <p class="breadcrumbs"><span class="mr-2">ADD</span></p>
+                <h1 class="mb-0 bread">New Card</h1>
+            </div>
+        </div>
+    </div>
+</div>
 
-    CARD NUMBER<br>
-    <input type="text" name="cnum" value="" required ><br><br>
-    CVV<br>
-    <input type="text" name="cvv" value=""   required  ><br><br>
+<section class="ftco-section">
+    <div class="container">
+        <!-- Content -->
+        <div id="content" class="colM">
 
-    EXPIRY DATE<br>
-    <input type="date" name="edate" value=""  required><br><br>
+            <div id="content-main">
 
-    Amount<br/>
-    <input type="text" name="amnt" value=""   required  ><br><br>
+                <form action="/addaccount/" method="post">
+                    {% csrf_token %}
+                    <div class="container">
 
-  
+                        <section class="panel panel-default">
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <label for="cnum" class="col-sm-3 control-label"> Card Number</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" name="cnum" value="" class="form-control" id="cnum" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="cvv" class="col-sm-3 control-label">CVV</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" name="cvv" value="" id="cvv" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="expdate" class="col-sm-3 control-label">Expiry Date</label>
+                                    <div class="col-sm-9">
+                                        <input type="date" class="form-control" name="edate" value="" id="expdate"
+                                            required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="amount" class="col-sm-3 control-label">Amount</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" name="amnt" value="" id="amount"
+                                            required>
+                                    </div>
+                                </div>
+                                <hr>
 
-<input type="submit" value="UPDATE">
-</form
-    {% endblock %}
+                                <div class="form-group">
+                                    <div class="col-sm-offset-3 col-sm-9">
+                                        <input type="submit" class="btn btn-primary" value="Update">
+
+                                    </div>
+                                </div>
+                            </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

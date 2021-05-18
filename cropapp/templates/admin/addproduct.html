@@ -1,44 +1,46 @@
 {% extends 'admin/adminbasee.html' %}
 {% load static %}
 {% block Content1 %}
- <div class="hero-wrap hero-bread" style="background-image: url('{% static '/images/bg_n1.jpg' %}');">
-      <div class="container">
-        <div class="row no-gutters slider-text align-items-center justify-content-center">
-          <div class="col-md-9 ftco-animate text-center">
-            <p class="breadcrumbs"><span class="mr-2">ADD</span></p>
-            <h1 class="mb-0 bread">Products</h1>
-          </div>
-        </div>
+<div class="hero-wrap hero-bread" style="background-image: url('{% static '/images/bg_n1.jpg' %}');">
+  <div class="container">
+    <div class="row no-gutters slider-text align-items-center justify-content-center">
+      <div class="col-md-9 ftco-animate text-center">
+        <p class="breadcrumbs"><span class="mr-2">ADD</span></p>
+        <h1 class="mb-0 bread">Products</h1>
       </div>
     </div>
+  </div>
+</div>
 
-    <section class="ftco-section">
-        <div class="container">
-               <!-- Content -->
+<section class="ftco-section">
+  <div class="container">
+    <!-- Content -->
     <div id="content" class="colM">
 
-        <div id="content-main">
+      <div id="content-main">
 
 
-<form enctype="multipart/form-data" action="/additemdb/" method="post" id="products_form" novalidate>
-    {% csrf_token %}
-<div class = "container">
+        <form enctype="multipart/form-data" action="/additemdb/" method="post" id="products_form" novalidate>
+          {% csrf_token %}
+          <div class="container">
 
-  <section class = "panel panel-default">
-<div class = "panel-body">
-  <div class = "form-group">
-    <label for = "name" class = "col-sm-3 control-label"> Product name </label>
-    <div class = "col-sm-9">
-      <input type = "text" class = "form-control" name = "pname" id = "name" placeholder = "Title" required>
-    </div>
-  </div> <! - form-group // ->
-  <div class = "form-group">
-    <label for = "about" class = "col-sm-3 control-label"> Description </label>
-    <div class = "col-sm-9">
-      <textarea class = "form-control" name="desc" required> </textarea>
-    </div>
-  </div> <! - form-group // ->
-      <!-- <div class = "form-group">
+            <section class="panel panel-default">
+              <div class="panel-body">
+                <div class="form-group">
+                  <label for="name" class="col-sm-3 control-label"> Product name </label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" name="pname" id="name" placeholder="Title" required>
+                  </div>
+                </div>
+                <! - form-group // ->
+                  <div class="form-group">
+                    <label for="about" class="col-sm-3 control-label"> Description </label>
+                    <div class="col-sm-9">
+                      <textarea class="form-control" name="desc" required> </textarea>
+                    </div>
+                  </div>
+                  <! - form-group // ->
+                    <!-- <div class = "form-group">
     <label for = "tech" class = "col-sm-3 control-label"> Iteam List </label>
     <div class = "col-sm-3">
    <select class = "form-control">
@@ -50,40 +52,44 @@
     </div>
   </div> <! - form-group // -> -->
 
-  <div class = "form-group">
-    <label for = "qty" class = "col-sm-3 control-label"> Product price kg/ or unit </label>
-    <div class = "col-sm-3">
-   <input type = "number" class = "form-control" name = "price"  placeholder = "₹" required>
-    </div>
-  </div> <! - form-group // ->
+                    <div class="form-group">
+                      <label for="qty" class="col-sm-3 control-label"> Product price kg/ or unit </label>
+                      <div class="col-sm-3">
+                        <input type="number" class="form-control" name="price" placeholder="₹" required>
+                      </div>
+                    </div>
+                    <! - form-group // ->
 
-  <div class = "form-group">
-    <label for = "name" class = "col-sm-3 control-label"> Upload Image </label>
-    <div class = "col-sm-3">
-      <label class = "control-label small" for = "file_img"> Image (jpg / png): </label> <input type = "file" name = "pic">
-    </div>
-<!-- <div class = "col-sm-3">
+                      <div class="form-group">
+                        <label for="name" class="col-sm-3 control-label"> Upload Image </label>
+                        <div class="col-sm-3">
+                          <label class="control-label small" for="file_img"> Image (jpg / png): </label> <input
+                            type="file" name="pic">
+                        </div>
+                        <!-- <div class = "col-sm-3">
       <label class = "control-label small" for = "file_img"> Files: </label> <input type = "file" name = "file_archive">
     </div> -->
-  </div> <! - form-group // ->
+                      </div>
+                      <! - form-group // ->
 
-<hr>
+                        <hr>
 
-    <div class = "form-group">
-    <div class = "col-sm-offset-3 col-sm-9">
-      <button type = "submit" class = "btn btn-primary"> Save </button>
-      &nbsp; &nbsp;<button type = "reset" class = "btn btn-primary"> Delete </button>
-    </div>
-  </div> <! - form-group // ->
+                        <div class="form-group">
+                          <div class="col-sm-offset-3 col-sm-9">
+                            <button type="submit" class="btn btn-primary"> Save </button>
+                            &nbsp; &nbsp;<button type="reset" class="btn btn-primary"> Delete </button>
+                          </div>
+                        </div>
+                        <! - form-group // ->
 
-</form> 
-</div>
+        </form>
+      </div>
 
-        
-        <br class="clear">
+
+      <br class="clear">
     </div>
     <!-- END Content -->
-        </div>
-    </section>
+  </div>
+</section>
 
 {% endblock %}

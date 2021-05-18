@@ -5,24 +5,27 @@
 <form enctype="multipart/form-data" action="/updatecrop/" method="post" id="products_form" novalidate>
     {% csrf_token %}
 
-    <input type="number"  name="proid" value="{{cropedit.pid}}" hidden >
-<div class = "container">
+    <input type="number" name="proid" value="{{cropedit.pid}}" hidden>
+    <div class="container">
 
-  <section class = "panel panel-default">
-<div class = "panel-body">
-  <div class = "form-group">
-    <label for = "name" class = "col-sm-3 control-label"> Product name </label>
-    <div class = "col-sm-9">
-      <input type = "text" class = "form-control" name = "pname" id = "name" value= "{{cropedit.pname}}" readonly>
-    </div>
-  </div> <! - form-group // ->
-  <div class = "form-group">
-    <label for = "about" class = "col-sm-3 control-label"> Description </label>
-    <div class = "col-sm-9">
-      <textarea class = "form-control" name="desc">{{cropedit.desc}} </textarea>
-    </div>
-  </div> <! - form-group // ->
-      <!-- <div class = "form-group">
+        <section class="panel panel-default">
+            <div class="panel-body">
+                <div class="form-group">
+                    <label for="name" class="col-sm-3 control-label"> Product name </label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" name="pname" id="name" value="{{cropedit.pname}}"
+                            readonly>
+                    </div>
+                </div>
+                <! - form-group // ->
+                    <div class="form-group">
+                        <label for="about" class="col-sm-3 control-label"> Description </label>
+                        <div class="col-sm-9">
+                            <textarea class="form-control" name="desc">{{cropedit.desc}} </textarea>
+                        </div>
+                    </div>
+                    <! - form-group // ->
+                        <!-- <div class = "form-group">
     <label for = "tech" class = "col-sm-3 control-label"> Iteam List </label>
     <div class = "col-sm-3">
    <select class = "form-control">
@@ -34,36 +37,39 @@
     </div>
   </div> <! - form-group // -> -->
 
-  <div class = "form-group">
-    <label for = "qty" class = "col-sm-3 control-label"> Product price kg/ or unit </label>
-    <div class = "col-sm-3">
-   <input type = "number" class = "form-control" name = "price"  value="{{cropedit.price}}" placeholder = "₹" required>
-    </div>
-  </div> <! - form-group // ->
+                        <div class="form-group">
+                            <label for="qty" class="col-sm-3 control-label"> Product price kg/ or unit </label>
+                            <div class="col-sm-3">
+                                <input type="number" class="form-control" name="price" value="{{cropedit.price}}"
+                                    placeholder="₹" required>
+                            </div>
+                        </div>
+                        <! - form-group // ->
 
-  <!-- <div class = "form-group">
+                            <!-- <div class = "form-group">
     <label for = "name" class = "col-sm-3 control-label"> Upload Image </label>
     <div class = "col-sm-3">
       <label class = "control-label small" for = "file_img"> Image (jpg / png): </label> <input type = "file" name = "pic">
     </div> -->
-<!-- <div class = "col-sm-3">
+                            <!-- <div class = "col-sm-3">
       <label class = "control-label small" for = "file_img"> Files: </label> <input type = "file" name = "file_archive">
     </div> -->
-  </div> <! - form-group // ->
+            </div>
+            <! - form-group // ->
 
-<hr>
+                <hr>
 
-    <div class = "form-group">
-    <div class = "col-sm-offset-3 col-sm-9">
-      <button type = "submit" class = "btn btn-primary"> Update </button>     
-    </div>
-  </div> 
-  </form>
+                <div class="form-group">
+                    <div class="col-sm-offset-3 col-sm-9">
+                        <button type="submit" class="btn btn-primary"> Update </button>
+                    </div>
+                </div>
+</form>
 
-<form action="/deletecrop/" method="POST">    
+<form action="/deletecrop/" method="POST">
     {% csrf_token %}
     <input type="number" name="pid" value={{cropedit.pid}} hidden>
-    &nbsp; &nbsp;<button type = "submit" class = "btn btn-primary"> Delete </button>
+    &nbsp; &nbsp;<button type="submit" class="btn btn-primary"> Delete </button>
 </form>
-  <! - form-group // ->
-{% endblock %}
+<! - form-group // ->
+    {% endblock %}

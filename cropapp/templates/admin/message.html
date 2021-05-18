@@ -1,29 +1,55 @@
 {% extends 'admin/adminbasee.html' %}
 {% load static %}
 {% block Content1 %}
-<table border="">
-    <tr>
-        <th>User ID</th>
-        <th>Message</th>
-        <th>Reply</th>
-    </tr>
-    {% for x in msgs %}
-    <tr>
-        <td>{{x.uid_id}}</td>
-        <td>{{x.quest}}</td>
-        <td>{% if x.rep == "pending" %}
-            <form action="/qReplyDb/" method="post">{% csrf_token %}
-                <textarea name="qReply">       </textarea>
-                <input type="number" name="mid" value="{{x.mid}}" hidden><br>
-                <input type="submit" value="Send">
-            </form>
-            {% else %}
-            {{x.rep}}
-            {% endif %}
-        </td>
-    </tr>
+<div class="hero-wrap hero-bread" style="background-image: url('{% static '/images/bg_n2.jpg' %}');">
+    <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+            <div class="col-md-9 ftco-animate text-center">
+                <p class="breadcrumbs"><span class="mr-2">Admin</span></p>
+                <h1 class="mb-0 bread">MESSEAGES</h1>
+            </div>
+        </div>
+    </div>
+</div>
+<section class="ftco-section ftco-cart">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 ftco-animate">
+                <div class="cart-list">
+                    <table class="table">
+                        <thead class="thead-primary">
+                            <tr class="text-center">
 
-    {% endfor %}
-</table>
+                                <th>User ID</th>
+                                <th>Message</th>
+                                <th>Reply</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            {% for x in msgs %}
+                            <tr>
+                                <td>{{x.uid_id}}</td>
+                                <td>{{x.quest}}</td>
+                                <td>{% if x.rep == "pending" %}
+                                    <form action="/qReplyDb/" method="post">{% csrf_token %}
+                                        <textarea name="qReply">       </textarea>
+                                        <input type="number" name="mid" value="{{x.mid}}" hidden><br>
+                                        <input type="submit" value="Send">
+                                    </form>
+                                    {% else %}
+                                    {{x.rep}}
+                                    {% endif %}
+                                </td>
+                            </tr>
+
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 {% endblock %}

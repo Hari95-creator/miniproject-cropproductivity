@@ -439,6 +439,36 @@ def logout(request):
         print('exception')
         return redirect('/index/')
 
+def changeaddress(request):
+    updateuser=userdata(request)
+    print("id:",updateuser.id)
+    return render(request,'user/changeaddress.html',{'updateuser':updateuser})
+
+def updateuser(request):
+    db = userregister.objects.get(id=request.POST.get('usrid'))
+    db.fname= request.POST.get('fname')
+    db.lname=request.POST.get('lname')
+    db.email= request.POST.get('email')
+    db.phone=request.POST.get('phone')
+    db.save()
+    return userhome(request)
+
+def userpass(request):
+    if request.method=='POST':
+        user=userdata(request)
+        if user.pwd==request.POST.get('old_password'):
+            if request.POST.get('new_password1')==request.POST.get('new_password2'):
+                user.pwd=request.POST.get('new_password1')
+                user.save()
+            else:
+                return HttpResponse('Password doesnt matching')
+        else:
+            return HttpResponse('current password doesnt matching')
+
+    return render(request, 'user/changepasword.html')
+
+
+
 
 
 

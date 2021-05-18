@@ -1,0 +1,93 @@
+{% extends 'loginsignupbase.html' %}
+{% load static %}
+{% block content %}
+<style>
+    .helptext {
+        color: #82ae46;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    ul.errorlist {
+        color: #fd0303;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .btn-primary {
+        color: #fff;
+        background-color: #82ae46;
+        border-color: #82ae46;
+    }
+</style>
+
+
+<div class="col-sm-10 login-box">
+    <div class="row">
+        <div class="col-lg-8 col-md-7 log-det">
+
+            <h2>Profile Updation</h2>
+
+            <p></p>
+
+
+            <div class="col-xl-7 ftco-animate">
+                <form action="/updateuser/" method="post" class="billing-form">
+                    {% csrf_token %}
+                    <input type="number" value={{updateuser.id}} name="usrid" hidden>
+                    <p></p>
+                    <div class="row align-items-end">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="firstname">First Name</label>
+                                <input type="text" class="form-control" placeholder="" value="{{ updateuser.fname }}"
+                                    name="fname" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="lastname">Last Name</label>
+                                <input type="text" class="form-control" placeholder="" value="{{ updateuser.lname }}"
+                                    name="lname" required>
+                            </div>
+                        </div>
+                        <div class="w-100"></div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="phone">Phone</label>
+                                <input type="tel" class="form-control" placeholder="" value="{{updateuser.phone}}"
+                                    name="phone" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="emailaddress">Email Address</label>
+                                <input type="email" class="form-control" placeholder="" value="{{updateuser.email}}"
+                                    name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="text-center">
+
+                                <div class="text-center">
+                                    <p></p>
+
+                                    <input type="submit" class="btn btn-primary" value="Change">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="w-100"></div>
+
+                    </div>
+                </form><!-- END -->
+            </div>
+
+
+
+        </div>
+        <div class="col-lg-4 col-md-5 box-de" style="background-image: url({% static '/images/2.jpg' %});">
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,43 +1,63 @@
 {% extends 'admin/adminbasee.html' %}
 {% load static %}
 {% block Content1 %}
-<center>
-    <h2>Finished Orders</h2>
-</center>
-<br /><br />
-<table border="1">
-    <tr>
-        <th>Order Id</th>
-        <th>Crop Id</th>
-        <th>Crop Name</th>
-        <th>Quantity</th>
-        <th>Total amount</th>
-        <th>User Id</th>
-        <th>Address</th>
-        <th>Phone</th>
-        <th>Order Date</th>
-        <th>Status</th>
-    </tr>
-    {% for x in list2 %}
-    <tr>
-        <td>{{x.oid}}</td>
-        <td>{{x.pid_id}}</td>
-        <td>{{x.pname}}</td>
-        <td>{{x.quantity}}</td>
-        <td>
-            <script>
-                var i = {{ x.price }}* {{ x.quantity }};
-                document.write(i);
-            </script>
-        </td>
-        <td>{{x.uid_id}}</td>
-        <td>{{x.Add1}}<br />{{x.Add2}}<br />{{x.Add3}}</td>
-        <td>{{x.ph}}</td>
-        <td>{{x.odate}}</td>
-        <td>{{x.status}} on {{x.ddate}} </td>
+<div class="hero-wrap hero-bread" style="background-image: url('{% static '/images/bg_n2.jpg' %}');">
+    <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+            <div class="col-md-9 ftco-animate text-center">
+                <p class="breadcrumbs"><span class="mr-2">FINISHED</span></p>
+                <h1 class="mb-0 bread">ORDER DETAILS</h1>
+            </div>
+        </div>
+    </div>
+</div>
+<section class="ftco-section ftco-cart">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 ftco-animate">
+                <div class="cart-list">
+                    <table class="table">
+                        <thead class="thead-primary">
+                            <tr class="text-center">
+                                <th>Order Id</th>
+                                <th>Crop Id</th>
+                                <th>Crop Name</th>
+                                <th>Quantity</th>
+                                <th>Total amount</th>
+                                <th>User Id</th>
+                                <th>Address</th>
+                                <th>Phone</th>
+                                <th>Order Date</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for x in list2 %}
+                            <tr>
+                                <td>{{x.oid}}</td>
+                                <td>{{x.pid_id}}</td>
+                                <td>{{x.pname}}</td>
+                                <td>{{x.quantity}}</td>
+                                <td>
+                                    <script>
+                                        var i = {{ x.price }}* {{ x.quantity }};
+                                        document.write(i);
+                                    </script>
+                                </td>
+                                <td>{{x.uid_id}}</td>
+                                <td>{{x.Add1}}<br />{{x.Add2}}<br />{{x.Add3}}</td>
+                                <td>{{x.ph}}</td>
+                                <td>{{x.odate}}</td>
+                                <td>{{x.status}} on {{x.ddate}} </td>
 
-    </tr>
-    {% endfor %}
-</table>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 {% endblock %}

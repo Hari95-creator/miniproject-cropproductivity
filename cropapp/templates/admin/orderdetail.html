@@ -2,61 +2,81 @@
 {% load static %}
 
 {% block Content1 %}
-<center>
-    <h2>Order Details</h2>
-</center><br>
-<table border="1">
-    <tr>
-        <th>Order Id</th>
-        <th>Crop Id</th>
-        <th>Crop Name</th>
-        <th>Quantity</th>
-        <th>Total amount</th>
-        <th>User Id</th>
-        <th>Address</th>
-        <th>Phone</th>
-        <th>Order Date</th>
-        <th>Status</th>
-        <th>Manage</th>
-    </tr>
-    {% for x in list1 %}
-    <tr>
-        <td>{{x.oid}}</td>
-        <td>{{x.pid_id}}</td>
-        <td>{{x.pname}}</td>
-        <td>{{x.quantity}}</td>
-        <td>
+<div class="hero-wrap hero-bread" style="background-image: url('{% static '/images/bg_n2.jpg' %}');">
+    <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+            <div class="col-md-9 ftco-animate text-center">
+                <p class="breadcrumbs"><span class="mr-2">ORDER</span></p>
+                <h1 class="mb-0 bread">DETAILS</h1>
+            </div>
+        </div>
+    </div>
+</div>
+<section class="ftco-section ftco-cart">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 ftco-animate">
+                <div class="cart-list">
+                    <table class="table">
+                        <thead class="thead-primary">
+                            <tr class="text-center">
 
-            {{x.price}}
-            <!-- <script>
-                var i = {{ x.price }}* {{ x.quantity}};
-                document.write(i);
-            </script> -->
-        </td>
-        <td>{{x.uid_id}}</td>
-        <td>{{x.Add1}}<br />{{x.Add2}}<br />{{x.Add3}}</td>
-        <td>{{x.ph}}</td>
-        <td>{{x.odate}}</td>
-        <td>{% if x.status == 'Accepted' %}
-            {{x.status}} .<br>Expected delivery date: {{x.ddate}}
-            {% else %}
-            {{x.status}}
-            {% endif %}</td>
-        <td>
-            <form method="post" action="/manageOrder/">{% csrf_token %}
-                <input type="number" name="oid" value="{{x.oid}}" hidden>
-                {% if x.status == 'pending' %}
-                &nbsp&nbsp Expected date of delivery:&nbsp&nbsp <input type="date" name="exdate" value="null">
-                &nbsp&nbsp <input type="submit" name="Accept" value="Accept"><br><br>
-                <br>
-                {% elif x.status == 'Accepted' %}
-                <input type="submit" name="Delivered" value="Delivered">
-                {% else %}
-                Delivered on on {{x.ddate}}
-                {% endif %}
-            </form>
-        </td>
-    </tr>
-    {% endfor %}
-</table>
+                                <th>Order Id</th>
+                                <th>Crop Id</th>
+                                <th>Crop Name</th>
+                                <th>Quantity</th>
+                                <th>Total amount</th>
+                                <th>User Id</th>
+                                <th>Address</th>
+                                <th>Phone</th>
+                                <th>Order Date</th>
+                                <th>Status</th>
+                                <th>Manage</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for x in list1 %}
+                            <tr>
+                                <td>{{x.oid}}</td>
+                                <td>{{x.pid_id}}</td>
+                                <td>{{x.pname}}</td>
+                                <td>{{x.quantity}}</td>
+                                <td>
+
+                                    {{x.price}}
+
+                                </td>
+                                <td>{{x.uid_id}}</td>
+                                <td>{{x.Add1}}<br />{{x.Add2}}<br />{{x.Add3}}</td>
+                                <td>{{x.ph}}</td>
+                                <td>{{x.odate}}</td>
+                                <td>{% if x.status == 'Accepted' %}
+                                    {{x.status}} .<br>Expected delivery date: {{x.ddate}}
+                                    {% else %}
+                                    {{x.status}}
+                                    {% endif %}</td>
+                                <td>
+                                    <form method="post" action="/manageOrder/">{% csrf_token %}
+                                        <input type="number" name="oid" value="{{x.oid}}" hidden>
+                                        {% if x.status == 'pending' %}
+                                        &nbsp&nbsp Expected date of delivery:&nbsp&nbsp <input type="date" name="exdate"
+                                            value="null">
+                                        &nbsp&nbsp <input type="submit" name="Accept" value="Accept"><br><br>
+                                        <br>
+                                        {% elif x.status == 'Accepted' %}
+                                        <input type="submit" name="Delivered" value="Delivered">
+                                        {% else %}
+                                        Delivered on on {{x.ddate}}
+                                        {% endif %}
+                                    </form>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 {% endblock %}
