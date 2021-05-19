@@ -38,7 +38,10 @@
                             {% for x in list1 %}
                             <tr>
                                 <td>{{x.oid}}</td>
-                                <td>{{x.pid_id}}</td>
+                                
+                                <!-- forgein key -->
+                                <td>{{x.pid_id}}</td> 
+
                                 <td>{{x.pname}}</td>
                                 <td>{{x.quantity}}</td>
                                 <td>
@@ -56,15 +59,16 @@
                                     {{x.status}}
                                     {% endif %}</td>
                                 <td>
-                                    <form method="post" action="/manageOrder/">{% csrf_token %}
+                                    <form method="post" action="/manageOrder/">
+                                        {% csrf_token %}
                                         <input type="number" name="oid" value="{{x.oid}}" hidden>
                                         {% if x.status == 'pending' %}
                                         &nbsp&nbsp Expected date of delivery:&nbsp&nbsp <input type="date" name="exdate"
-                                            value="null">
-                                        &nbsp&nbsp <input type="submit" name="Accept" value="Accept"><br><br>
+                                            value="null"><br><br>
+                                        &nbsp&nbsp <input type="submit" name="Accept" value="Accept" class="btn btn-success"><br><br>
                                         <br>
                                         {% elif x.status == 'Accepted' %}
-                                        <input type="submit" name="Delivered" value="Delivered">
+                                        <input type="submit" name="Delivered" value="Delivered" class="btn btn-success">
                                         {% else %}
                                         Delivered on on {{x.ddate}}
                                         {% endif %}

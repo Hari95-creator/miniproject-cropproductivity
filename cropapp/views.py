@@ -181,17 +181,7 @@ def soiltest(request):
     return render(request,'user/soiiltest.html',{'user':user})
 
 def soilPredictionDb(request):
-    data=pd.read_csv("media/data/predictData.csv")
-    croplist=["coconut","Mango","Jackfruit","Onion","cumcumber"]
-    print(data)
-    x=data.iloc[:,[0,1,2,3,4,5,6,7,8]].values
-    print(x)
-    y=data['class']
-    print(y)
-    from sklearn.model_selection import train_test_split
-    x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.3,random_state=2)
-    knn=DecisionTreeClassifier()
-    print(knn.fit(x_train,y_train))
+
     x0=float(request.POST.get('ca'))
     x1=float(request.POST.get('mag'))
     x2=float(request.POST.get('po'))
@@ -201,6 +191,21 @@ def soilPredictionDb(request):
     x6=float(request.POST.get('carb'))
     x7=float(request.POST.get('ph'))
     x8=float(request.POST.get('moist'))
+
+    data=pd.read_csv("media/data/predictData.csv")
+    croplist=["coconut","Mango","Jackfruit","Onion"]
+    print(data)
+    x=data.iloc[:,[0,1,2,3,4,5,6,7,8]].values
+    print(x)
+    y=data['class']
+    print(y)
+    from sklearn.model_selection import train_test_split
+    x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.3,random_state=2)
+    knn=DecisionTreeClassifier()
+    print(knn.fit(x_train,y_train))
+    y_out=knn.predict(x_test)
+    from sklearn.metrics import accuracy_score
+    print("accuracy score=",accuracy_score(y_test,y_out)*100)
     y_pred=knn.predict([[x0,x1,x2,x3,x4,x5,x6,x7,x8]])
     print(y_pred,"type=",type(y_pred))
     nn=int(y_pred)-1
@@ -247,6 +252,11 @@ def weatherPredictionDb(request):
     x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.3, random_state=2)
     # Fitting the classifier into training set
     clf.fit(x_train, y_train)
+
+    y_out=clf.predict(x_test)
+    from sklearn.metrics import accuracy_score
+    print("accuracy score=",accuracy_score(y_test,y_out)*100)
+
     x1 = float(request.POST.get('temp'))
     x2 = float(request.POST.get('hum'))
     x3 = float(request.POST.get('ph'))
@@ -355,9 +365,10 @@ def updatecropdb(request):
     return adminhome(request)
 
 def orderdetail(request):
+    admin=admindata(request)
     udata = userregister.objects.all()
     new = orders.objects.filter(Q(status='pending') | Q(status='Accepted'))
-    return render(request,'admin/orderdetail.html',{'list1': new, 'udata': udata})
+    return render(request,'admin/orderdetail.html',{'list1': new, 'udata': udata,'admin':admin})
 
 def manageorder(request):
     ord = orders.objects.get(oid=request.POST.get('oid'))
@@ -377,18 +388,19 @@ def manageorder(request):
 
    
 def viewOldOrders(request):
+    admin=admindata(request)
     udata = userregister.objects.all()
     old = orders.objects.filter(status="Delivered")
-    return render(request, 'admin/finished.html', {'list2': old, 'udata': udata})
+    return render(request, 'admin/finished.html', {'list2': old, 'udata': udata,'admin':admin})
 
 def orderDetails(request):
-    udata = userdata(request)
+    user= userdata(request)
 
     crop=crops.objects.all()
-    ord=orders.objects.filter(uid=udata.id)
+    ord=orders.objects.filter(uid=user.id)
     for x in ord:
         print(x.oid)
-    return render(request,'user/orderDetails.html',{'Orders':ord,'pros':crop})
+    return render(request,'user/orderDetails.html',{'Orders':ord,'pros':crop,'user':user})
 
 def cancelOrder(request):
     obj=orders.objects.get(oid=request.POST.get('oid'))
@@ -419,8 +431,9 @@ def messageDb(request):
     return messagetoAdminPage(request)
 
 def adViewMessages(request):
+    admin=admindata(request)
     msgs=messages.objects.all().order_by('-mid')
-    return render(request, 'admin/message.html',{"msgs":msgs})
+    return render(request, 'admin/message.html',{"msgs":msgs,'admin':admin})
 
 def qReplyDb(request):
     msg=messages.objects.get(mid=request.POST.get('mid'))
@@ -444,7 +457,7 @@ def changeaddress(request):
     print("id:",updateuser.id)
     return render(request,'user/changeaddress.html',{'updateuser':updateuser})
 
-def updateuser(request):
+def updateuser(request):#profile update function
     db = userregister.objects.get(id=request.POST.get('usrid'))
     db.fname= request.POST.get('fname')
     db.lname=request.POST.get('lname')
@@ -466,6 +479,20 @@ def userpass(request):
             return HttpResponse('current password doesnt matching')
 
     return render(request, 'user/changepasword.html')
+
+def adminpass(request):
+    if request.method=='POST':
+        admin=admindata(request)
+        if admin.pwd==request.POST.get('old_password'):
+            if request.POST.get('new_password1')==request.POST.get('new_password2'):
+                admin.pwd=request.POST.get('new_password1')
+                admin.save()
+            else:
+                return HttpResponse('Password doesnt matching')
+        else:
+            return HttpResponse('current password doesnt matching')
+
+    return adminhome(request)
 
 
 

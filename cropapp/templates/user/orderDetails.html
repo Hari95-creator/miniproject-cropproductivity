@@ -1,45 +1,64 @@
 {% extends 'user/userbase.html' %}
 {% load static %}
 {% block Content1 %}
+<div class="hero-wrap hero-bread" style="background-image: url('{% static '/images/bg_n1.jpg' %}');">
+    <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+            <div class="col-md-9 ftco-animate text-center">
+                <p class="breadcrumbs"><span class="mr-2">Order</span></p>
+                <h1 class="mb-0 bread">Details</h1>
+            </div>
+        </div>
+    </div>
+</div>
+<section class="ftco-section ftco-cart">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 ftco-animate">
+                <div class="cart-list">
+                    <table class="table">
+                        <thead class="thead-primary">
+                            <tr class="text-center">
 
-
-<table>
-{% for x in Orders %}
-    <tr>
-        <th>Product Id</th>
-        <td>: {{x.pid_id}}</td>
-    </tr>
-    <tr>
-        <th>Product name</th>
-        <td>: {{x.pname}}</td>
-    </tr>
-    <tr>
-        <th>Price</th>
-        <td>:
-            <script>document.write({{ x.price }}* {{ x.quantity }});</script>
-        </td>
-    </tr>
-    <tr>
-        <th>Order Status</th>
-        <td>: {{x.status}}</td>
-    </tr>
-    <tr>
-        <td></td>
-        <td>
-            <form method="post" action="/cancelOrder/">{% csrf_token %}
-                <input type="number" name="oid" value="{{x.oid}}" hidden>
-                {% if x.status == 'pending' %}
-                &nbsp&nbsp <input type="submit" name="Cancel" value="Cancel"><br><br>
-                <br>
-                {% elif x.status == 'Accepted' %}
-                Expected date of delivery:{{x.ddate}}
-                &nbsp&nbsp <input type="submit" name="Cancel" value="Cancel"><br><br>
-                {% elif x.status == 'Canceled' %}
-                Canceled on :{{x.ddate}}
-                {% else %}
-                Delivered on on {{x.ddate}}
-                {% endif %}
-            </form>
-    {% endfor %}
-</table>
+                                <th>Product Id</th>
+                                <th>Product Name</th>
+                                <th>Price</th>
+                                <th>OrderStatus</th>
+                                <th>Manage</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for x in Orders %}
+                            <tr>
+                                <td>{{x.pid_id}}</td>
+                                <td>{{x.pname}}</td>
+                                <td>{{x.price}}</td>
+                                <td>{{x.status}}</td>
+                                <td>
+                                    <form method="post" action="/cancelOrder/">{% csrf_token %}
+                                        <input type="number" name="oid" value="{{x.oid}}" hidden>
+                                        {% if x.status == 'pending' %}
+                                        &nbsp&nbsp <input type="submit" name="Cancel" class="btn btn-success"
+                                            value="Cancel"><br><br>
+                                        <br>
+                                        {% elif x.status == 'Accepted' %}
+                                        Expected date of delivery:{{x.ddate}}
+                                        &nbsp&nbsp <input type="submit" name="Cancel" class="btn btn-success"
+                                            value="Cancel"><br><br>
+                                        {% elif x.status == 'Canceled' %}
+                                        Canceled on :{{x.ddate}}
+                                        {% else %}
+                                        Delivered on on {{x.ddate}}
+                                        {% endif %}
+                                    </form>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 {% endblock %}
