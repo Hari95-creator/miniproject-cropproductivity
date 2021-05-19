@@ -35,7 +35,7 @@
                                     <form action="/qReplyDb/" method="post">{% csrf_token %}
                                         <textarea name="qReply">       </textarea>
                                         <input type="number" name="mid" value="{{x.mid}}" hidden><br>
-                                        <input type="submit" value="Send">
+                                        <input type="submit" value="Send" class="btn btn-success">
                                     </form>
                                     {% else %}
                                     {{x.rep}}
