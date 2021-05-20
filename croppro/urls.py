@@ -68,6 +68,9 @@ urlpatterns = [
     path('updateuser/',views.updateuser),
     path('userupdate/', views.userpass),
     path('adminpass/',views.adminpass),
+    path('changeuserpass/',views.changeuserpass),
+    path('changeadminpass/',views.changeadminpass),
+
     
     
 

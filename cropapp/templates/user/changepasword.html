@@ -30,6 +30,12 @@ ul.errorlist{
             <div class="text-box-cont">
                 <form action="/userupdate/" method="post">
                     {% csrf_token %}
+                    {% if msg %}
+                    
+                    <span style="color: red; text-align: justify;">{{ msg }}</span>
+
+                    {% endif %}
+                    <br>
                     <label for="id_old_password">Old password:</label><input type="password" name="old_password"
                                                                              autocomplete="current-password"
                                                                              autofocus="" required=""
@@ -45,6 +51,8 @@ ul.errorlist{
                                                                                            id="id_new_password2">
                     <p></p>
                     <button type="submit" class="btn btn-primary">Save changes</button>
+            
+                
                 </form>
             </div>
 

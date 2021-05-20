@@ -1,3 +1,4 @@
+import re
 import pandas as pd
 import datetime
 from sklearn.tree import DecisionTreeClassifier
@@ -350,7 +351,7 @@ def placeOrder(request):
 
     db.save()
 
-    return HttpResponse("entered")
+    return orderDetails(request)
 
 def editproduct(request):
     cropedit=crops.objects.get(pid=request.POST.get("proid"))
@@ -371,13 +372,15 @@ def orderdetail(request):
     return render(request,'admin/orderdetail.html',{'list1': new, 'udata': udata,'admin':admin})
 
 def manageorder(request):
+    admin=admindata(request)
     ord = orders.objects.get(oid=request.POST.get('oid'))
 
     if 'Accept' in request.POST:
         ord.ddate = request.POST.get('exdate')
         print("expdate=", ord.ddate)
         if ord.ddate == '':
-            return HttpResponse("Please enter expected date of delivery")
+            # return HttpResponse("Please enter expected date of delivery")
+            return render(request,'admin/expecteddate.html',{'admin':admin})
         ord.status = "Accepted"
 
     else:
@@ -466,6 +469,9 @@ def updateuser(request):#profile update function
     db.save()
     return userhome(request)
 
+def changeuserpass(request):
+    return render(request,'user/changepasword.html')
+
 def userpass(request):
     if request.method=='POST':
         user=userdata(request)
@@ -474,11 +480,14 @@ def userpass(request):
                 user.pwd=request.POST.get('new_password1')
                 user.save()
             else:
-                return HttpResponse('Password doesnt matching')
+                return render(request,'user/changepasword.html',{'msg':"password dosen't match"})
         else:
-            return HttpResponse('current password doesnt matching')
+            return render(request,'user/changepasword.html',{'msg':"current password doesn't  match"})
 
-    return render(request, 'user/changepasword.html')
+    return userhome(request)
+
+def changeadminpass(request):
+    return render(request,'admin/changeadminpasword.html')
 
 def adminpass(request):
     if request.method=='POST':
@@ -493,6 +502,8 @@ def adminpass(request):
             return HttpResponse('current password doesnt matching')
 
     return adminhome(request)
+
+
 
 
 
