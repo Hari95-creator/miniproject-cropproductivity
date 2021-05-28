@@ -70,6 +70,7 @@ urlpatterns = [
     path('adminpass/',views.adminpass),
     path('changeuserpass/',views.changeuserpass),
     path('changeadminpass/',views.changeadminpass),
+    path('ordersuccess/',views.ordersuccess),
 
     
     

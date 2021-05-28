@@ -1,0 +1,199 @@
+{% extends 'user/userbase.html' %}
+{% load static %}
+{% block Content1 %}
+<style>
+    .modal-confirm {
+        color: #636363;
+        width: 325px;
+        font-size: 14px;
+    }
+
+    .modal-confirm .modal-content {
+        padding: 20px;
+        border-radius: 5px;
+        border: none;
+    }
+
+    .modal-confirm .modal-header {
+        border-bottom: none;
+        position: relative;
+    }
+
+    .modal-confirm h4 {
+        text-align: center;
+        font-size: 26px;
+        margin: 30px 0 -15px;
+    }
+
+    .modal-confirm .form-control,
+    .modal-confirm .btn {
+        min-height: 40px;
+        border-radius: 3px;
+    }
+
+    .modal-confirm .close {
+        position: absolute;
+        top: -5px;
+        right: -5px;
+    }
+
+    .modal-confirm .modal-footer {
+        border: none;
+        text-align: center;
+        border-radius: 5px;
+        font-size: 13px;
+    }
+
+    .modal-confirm .icon-box {
+        color: #fff;
+        position: absolute;
+        margin: 0 auto;
+        left: 0;
+        right: 0;
+        top: -70px;
+        width: 95px;
+        height: 95px;
+        border-radius: 50%;
+        z-index: 9;
+        background: #82ce34;
+        padding: 15px;
+        text-align: center;
+        box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
+    }
+
+    .modal-confirm .icon-box i {
+        font-size: 58px;
+        position: relative;
+        top: 3px;
+    }
+
+    .modal-confirm.modal-dialog {
+        margin-top: 80px;
+    }
+
+    .modal-confirm .btn {
+        color: #fff;
+        border-radius: 4px;
+        background: #82ce34;
+        text-decoration: none;
+        transition: all 0.4s;
+        line-height: normal;
+        border: none;
+    }
+
+    .modal-confirm .btn:hover,
+    .modal-confirm .btn:focus {
+        background: #6fb32b;
+        outline: none;
+    }
+
+    .trigger-btn {
+        display: inline-block;
+        margin: 100px auto;
+    }
+</style>
+
+<body>
+
+
+    <div class="hero-wrap hero-bread" style="background-image: url('{% static '/images/bg_n2.jpg' %}');">
+        <div class="container">
+            <div class="row no-gutters slider-text align-items-center justify-content-center">
+                <div class="col-md-9 ftco-animate text-center">
+                    <p class="breadcrumbs"><span class="mr-2">Order</span></p>
+                    <h1 class="mb-0 bread">Confirmation</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section class="ftco-section ftco-cart">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 ftco-animate">
+                    <div class="cart-list">
+                        <table class="table">
+                            <thead class="thead-primary">
+                                <tr class="text-center">
+                                    <th> &nbsp;</th>
+                                    <th>Order ID</th>
+                                    <th>&nbsp;</th>
+                                    <th> Product Name</th>
+                                    <th>&nbsp;</th>
+                                    <th>Quantity</th>
+                                    <th>&nbsp;</th>
+                                    <th>Price</th>
+                                    <th>&nbsp;</th>
+                                    <th>Name</th>
+                                    <th>&nbsp;</th>
+                                    <th>Phone</th>
+                                    <th>&nbsp;</th>
+                                    <th>Address</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+
+
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td> {{db.oid}}</td>
+                                    <td>&nbsp;</td>
+                                    <td>{{db.pname}}</td>
+                                    <td>&nbsp;</td>
+                                    <td>{{db.quantity}}</td>
+                                    <td>&nbsp;</td>
+                                    <td>{{db.price}}</td>
+                                    <td>&nbsp;</td>
+                                    <td> {{db.fname}}{{db.lname}}</td>
+                                    <td>&nbsp;</td>
+                                    <td> {{db.ph}}</td>
+                                    <td>&nbsp;</td>
+                                    <td>{{db.Add1}}<br />{{db.Add2}}<br />{{db.Add3}}</td>
+                                    <!-- <td>&nbsp;</td> -->
+                                </tr>
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <div class="text-center">
+        <!-- Button HTML (to Trigger Modal) -->
+        <a href="#myModal" class="trigger-btn" data-toggle="modal">
+            <button type="button" class="btn btn-success">Click To Confirm</button>
+        </a>
+        <a href="/orderDetails/">
+            &nbsp; &nbsp;<button type="button" class="btn btn-success">Order View</button>
+        </a>
+
+    </div>
+
+    <!-- Modal HTML -->
+    <div id="myModal" class="modal fade">
+        <div class="modal-dialog modal-confirm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="icon-box">
+                        <i class="material-icons">&#xE876;</i>
+                    </div>
+                    <h4 class="modal-title w-100">Awesome!</h4>
+                </div>
+                <div class="modal-body">
+                    <p class="text-center">Your Order has been confirmed. Your Current Balance is
+                        {% if result %}
+                        {{result}}
+                        {% endif %}</p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-success btn-block" data-dismiss="modal">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+{% endblock %}

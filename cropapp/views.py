@@ -351,7 +351,9 @@ def placeOrder(request):
 
     db.save()
 
-    return orderDetails(request)
+    result=pay.bal
+
+    return render(request, 'user/ordersuccess.html', {'result': result,'user':udata,'db':db})
 
 def editproduct(request):
     cropedit=crops.objects.get(pid=request.POST.get("proid"))
@@ -503,6 +505,8 @@ def adminpass(request):
 
     return adminhome(request)
 
+def ordersuccess(request):
+    return render(request,'user/ordersuccess.html')
 
 
 

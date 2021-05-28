@@ -1,7 +1,7 @@
 {% extends 'user/userbase.html' %}
 {% load static %}
 
-{% block Content1 %}
+{% block Content2 %}
 
 <!-- slider start-->
 
@@ -37,53 +37,96 @@
             </div>
         </div>
     </div>
-</section>
 
-<!-- slider end -->
-<br>
-<section class="ftco-section">
-    <div class="container">
-        <div class="tab-content" id="myTabContent">
-            <div class="tab-pane fade  show active " id="All" role="tabpanel" aria-labelledby="All-tab">
-                <div class="row">
+    <!-- slider end -->
 
-
-                    {% for pro in cropview %}
-                    <div class="col-md-6 col-lg-3 ftco-animate">
-                        <div class="product">
-                            <a href="#" class="img-prod"><img class="img-fluid" src="{{pro.img}}"
-                                    alt="Colorlib Template" style="width: 250px; height: 250px;">
-                                <!-- <span class="status">on offer</span> -->
-                                <div class="overlay"></div>
-                            </a>
-                            <div class="text py-3 pb-4 px-3 text-center">
-                                <h3><a href="#">{{pro.pname}}</a></h3>
-                                <div class="d-flex">
-                                    <div class="pricing">
-                                        <p class="price"><span class="price-sale">₹{{pro.price}}</span>
-                                        </p>
+<section>
+    <div class="container-xl">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Fresh <b>Products</b></h2>
+                <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
+                <!-- Carousel indicators -->
+                <ol class="carousel-indicators">
+                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                    <li data-target="#myCarousel" data-slide-to="1"></li>
+                    <li data-target="#myCarousel" data-slide-to="2"></li>
+                </ol>
+                <!-- Wrapper for carousel items -->
+                <div class="carousel-inner">
+                    <div class="item carousel-item active">
+                        <div class="row">
+                            {% for pro in cropview %}
+                            <div class="col-sm-3">
+                                <div class="thumb-wrapper">
+                                    <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
+    
+                                        <div class="product">
+                             <a href="#" class="img-prod">
+    
+                                 <div class="img-box" style="width: 260px; height: 260px;">
+    
+                                        <img class="img-fluid"
+                                                               src="{{pro.img}}"
+                                                               alt="Colorlib Template"
+                                                               style="width: 250px; height: 250px;">
+                                     </div>
+                             </a>
+    
                                     </div>
-                                </div>
-                                <div class="bottom-area d-flex px-3">
-                                    <div class="m-auto d-flex">
-                                        <form action="/productview/" method="POST">
-                                            {% csrf_token %}
-                                            <input type="number" value="{{pro.pid}}" name="proid" hidden>
-
-                                            <input type="submit" class="btn btn-success" value="View">
-                                            <!-- <span><i class="ion-ios-menu"></i></span> -->
-
-                                        </form>
-
+    
+                                    <div class="thumb-content">
+                                        <h4>{{pro.pname}}</h4>
+                                        <div class="star-rating">
+                                            <ul class="list-inline">
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+                                            </ul>
+                                        </div>
+                                        <p class="item-price"><strike>₹GST</strike> <b>₹{{pro.price}}</b></p>
+    
+    
+                                        <div>
+                                            <form action ="/productview/" method="POST">
+                                        {% csrf_token %}
+                                        <input type="number" value="{{pro.pid}}" name="proid" hidden>
+    
+                                            <input  type="submit"   class="btn btn-success" value="View">
+                                             <!-- <span><i class="ion-ios-menu"></i></span> -->
+    
+                                         </form>
+                                        </div>
                                     </div>
+    
                                 </div>
+                                <hr>
                             </div>
+                            {% endfor %}
+    
+                            </div>
+    
                         </div>
+    
                     </div>
-                    {% endfor %}
+                    <a class="carousel-control-prev" href="#myCarousel" data-slide="prev">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                <a class="carousel-control-next" href="#myCarousel" data-slide="next">
+                    <i class="fa fa-angle-right"></i>
+                </a>
                 </div>
+                <!-- Carousel controls -->
+    
+            </div>
             </div>
         </div>
     </div>
-</section>
+    
+    
+    
+    </section>
+
 {% endblock %}
