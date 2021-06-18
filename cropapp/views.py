@@ -7,6 +7,7 @@ from cropapp.models import userregister,soilPrediction,weatherPrediction,crops,a
 from django.http.response import HttpResponse, JsonResponse
 from django.shortcuts import redirect, render
 from django.core.files.storage import FileSystemStorage
+from django.contrib.sessions.models import Session
 from django.db.models import Q
 
 # Create your views here.
@@ -448,9 +449,9 @@ def qReplyDb(request):
 def logout(request):
     try:
 
-        #Session.objects.all().delete()
-        del request.session['sid']
-        del request.session['pwd']
+        Session.objects.all().delete()
+        del request.Session.set_expiry(0)['sid']
+        del request.Session.set_expiry(0)['pwd']
         return redirect('/index/')
 
     except:
